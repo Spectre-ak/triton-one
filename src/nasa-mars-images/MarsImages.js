@@ -64,7 +64,7 @@ function LoadNasaAPIs(ele){
     if(date==""){
 		ReactDOM.render(<i>Invalid date</i>,document.getElementById("divForResults"));return;
  	}
-    
+                       
     req.open("GET", url);
     req.send();
    	
