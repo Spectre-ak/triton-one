@@ -2,7 +2,7 @@ import ReactDOM from "react-dom";
 import React, { useState, useEffect } from 'react';
 
 function ImageVidOps(props) {
-    const [ops, setCount] = useState(2);
+    const [ops, setCount] = useState(1);
     useEffect(() => {
         //console.log(ops);
         props.getOption(ops);
@@ -10,7 +10,7 @@ function ImageVidOps(props) {
     return (
         <div>
             <div class="form-check form-check-inline" onClick={() => setCount(1)} > 
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" />
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultChecked/>
                 <label class="form-check-label" for="inlineRadio1" >Images</label>
             </div>
             <div class="form-check form-check-inline" onClick={() => setCount(2)}>
@@ -51,7 +51,7 @@ class HubbleTelescope extends React.Component {
         )
     }
 }
-
+export {ImageVidOps};
 export default HubbleTelescope;
 
 /*
