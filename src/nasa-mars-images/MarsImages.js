@@ -40,7 +40,7 @@ function Image(props){
 	)
 }
 
-function getRandomInt(min, max) { 
+function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -64,7 +64,7 @@ function LoadNasaAPIs(ele){
     if(date==""){
 		ReactDOM.render(<i>Invalid date</i>,document.getElementById("divForResults"));return;
  	}
-                       
+    //const arr=[];
     req.open("GET", url);
     req.send();
    	

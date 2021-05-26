@@ -36,9 +36,18 @@ code {
       100% { transform: rotate(360deg); }
     }
 
-
+    .loaderSmall {
+      margin: 0 auto;
+      border: 2px solid #007bff;
+      border-top: 2px solid #ffffff;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      animation: spin 2s linear infinite
+    }
     
 
+    /*pagination css starts*/
     .pagination {
       margin: 15px auto;
       display: flex;
@@ -67,4 +76,26 @@ code {
     .pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
       border-radius: unset
     }
+     /*pagination css ends*/
+
+
+    ::-webkit-scrollbar {
+      width: 10px;
+      border-radius: 50px;
+      background-blend-mode: darken
+    }
     
+    ::-webkit-scrollbar-track {
+      background: #0b0b0c00;
+      border-radius: 10px
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: red;
+      border-radius: 10px;
+      background: rgb(102 95 95/ 30%)
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #007bff
+    }
