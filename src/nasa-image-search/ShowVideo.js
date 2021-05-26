@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import LoaderButtom from '../LoaderButton';
 function getUrlExtension(url){
     return url.split(/[#?]/)[0].split('.').pop().trim();
 }
@@ -59,9 +60,9 @@ class ShowVideo extends React.Component{
         super(props);
         this.state={
             ops:"n",
-            toBeRendered:<h1>wait</h1>,
+            toBeRendered:<LoaderButtom/>,
             vids:{"small":"lasd"},
-            videoUrl:"#",
+            videoUrl:<LoaderButtom/>,
         };
     }
     fetchVidJson(url){

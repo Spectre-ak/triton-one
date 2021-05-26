@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import ReactPaginate from 'react-paginate';
 
 import "../index.css";
+import Loader from '../Loader';
 import ShowVideo from './ShowVideo';
 var totalArr=[];
 
@@ -13,7 +14,7 @@ function Image(props){
 	return(
 		<div className="container" style={{paddingBottom:"40px"}} align="center">
 			<h5>{title}</h5>
-			<img src={url} className="img-fluid"/>
+			<img src={url} className="img-fluid" alt={"loading"}/>
 			<details id="a" style={{padding:"6px"}} >
 				<summary style={{outline: "none"}} id="detailsId">Read more</summary> 
 				{desc}
@@ -50,6 +51,7 @@ export default class AppPage extends Component {
             //url:"https://images-api.nasa.gov/search?q="+this.props.topic+"&media_type=image&page=1&description="+this.props.desc,
             url:"https://images-api.nasa.gov/search?keywords="+this.props.keywords+"&media_type="+this.props.media_type+"&page=1",
             isNextPage:true,
+            postData:<Loader/>
         };
         this.handlePageClick = this
             .handlePageClick
@@ -66,14 +68,14 @@ export default class AppPage extends Component {
             if(this.props.media_type==="image"){
                 postData = slice.map(pd => 
                     <React.Fragment>
-                        <Image url={pd.links[0].href} title={pd.data[0].title} desc={pd.data[0].description} />
+                        <Image url={pd.links[0].href} key={pd.links[0].href} title={pd.data[0].title} desc={pd.data[0].description} />
                     </React.Fragment>
                 ) 
             }
             else{
                 postData = slice.map(pd => 
                     <React.Fragment>
-                        <ShowVideo vidMetadata={pd.href} title={pd.data[0].title} desc={pd.data[0].description} id={pd.data[0].nasa_id}/>
+                        <ShowVideo vidMetadata={pd.href} key={pd.href} title={pd.data[0].title} desc={pd.data[0].description} id={pd.data[0].nasa_id}/>
                     </React.Fragment>
                     
                 ) 
@@ -105,7 +107,7 @@ export default class AppPage extends Component {
                 if(this.props.media_type==="image"){
                     postData = slice.map(pd => 
                         <React.Fragment>
-                            <Image url={pd.links[0].href} title={pd.data[0].title} desc={pd.data[0].description} />
+                            <Image url={pd.links[0].href} key={pd.links[0].href} title={pd.data[0].title} desc={pd.data[0].description} />
                         </React.Fragment>
                     ) 
                 }
