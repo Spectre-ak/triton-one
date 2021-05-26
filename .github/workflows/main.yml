@@ -6,9 +6,9 @@ name: triton CI
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [ triton-one-backend ]
   pull_request:
-    branches: [ main ]
+    branches: [ triton-one-backend ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -37,5 +37,5 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - run: |
-            docker build ./ -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/triton-one:0.1
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/triton-one:0.1
+            docker build ./triton-one -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/triton-one-backend:0.1
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/triton-one-backend:0.1
