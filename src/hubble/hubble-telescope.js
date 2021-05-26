@@ -1,5 +1,7 @@
 import ReactDOM from "react-dom";
 import React, { useState, useEffect } from 'react';
+import ReactPaginate from 'react-paginate';
+import PaginationHubble from "./PageDivsHubble";
 
 function ImageVidOps(props) {
     const [ops, setCount] = useState(1);
@@ -21,40 +23,73 @@ function ImageVidOps(props) {
     )
 }
 
+
+
 class HubbleTelescope extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = { show: "false",ops:2 };
-        this.handleClick = this.handleClick.bind(this);
-        this.updateOps=this.updateOps.bind(this);
+        this.state = {
+            urlToFetch:"http://localhost:8080/hubble/images"
+        };
+        this.loadResults=this.loadResults.bind(this);
     }
-    updateOps(e){
-        const newOps=e;
-        this.setState({ops:newOps});
+    
+    componentDidMount(){
+        //document.getElementById("instantTrigger").click
     }
-    handleClick() {
-        this.setState({ show: "true" })
-    };
-    getOption=(e)=>{
-        this.state.ops=e;
-        console.log(this.state)
-    };
     render() {
         return (
             <div className="container">
                 {/* <h1>loaded {this.state.show}</h1>
                 <button onClick={this.handleClick}>clisk</button> */}
                 <h5>Hubble Space Telescope Images and Videos</h5>
-                <ImageVidOps getOption={this.getOption}/>
+                <br/>
+                <ImageVidOps getOption={this.getOption}/><br/>
+                <input className="form-control border-secondary py-2" id="searchIDDescription" type="search" placeholder="M87.." style={{color:"white", borderRadius:"40px",backgroundColor:"#131316"}}></input>	
+				<br/>
+                <p align="center">
+					<button className="btn btn-primary" id="instantTrigger" onClick={this.loadResults}>Search...</button>
+				</p>
+                <br/>
+                <div id="divForResults">
+                    
+                </div>
             </div>
         )
     }
+    loadResults(){
+        ReactDOM.unmountComponentAtNode(document.getElementById("divForResults"));
+        ReactDOM.render(<PaginationHubble urlToFetch={this.state.urlToFetch} media_type={this.state.ops===1?"image":"video"}
+            search={document.getElementById("searchIDDescription").value}/>,document.getElementById("divForResults"));
+		
+    }
+    getOption=(e)=>{
+        this.state.ops=e;
+        if(e===1)
+            this.state.urlToFetch="http://localhost:8080/hubble/images";
+        else
+            this.state.urlToFetch="http://localhost:8080/hubble/videos";
+        
+    };
+
 }
 export {ImageVidOps};
 export default HubbleTelescope;
 
 /*
+        this.handleClick = this.handleClick.bind(this);
+        this.updateOps=this.updateOps.bind(this);
+
+updateOps(e){
+        const newOps=e;
+        this.setState({ops:newOps});
+    }
+    handleClick() {
+        this.setState({ show: "true" })
+    };
+
 function HubbleTelescope() {
   const [count, setCount] = useState(0);
 
