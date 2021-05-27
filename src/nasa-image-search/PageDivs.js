@@ -14,6 +14,7 @@ function Image(props){
 	return(
 		<div className="container" style={{paddingBottom:"40px"}} align="center">
 			<h5>{title}</h5>
+            <Loader/>
 			<img src={url} className="img-fluid" alt={"loading"}/>
 			<details id="a" style={{padding:"6px"}} >
 				<summary style={{outline: "none"}} id="detailsId">Read more</summary> 
@@ -57,35 +58,45 @@ export default class AppPage extends Component {
             .handlePageClick
             .bind(this);
     }
-    
+    UpdatePostDataImage(){
+        const data = this.state.currentFetchedRes;
+        const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
+        //console.log(slice);
+        var postData;
+        postData = slice.map(pd => 
+            <React.Fragment>
+                <Image url={pd.links[0].href} key={pd.links[0].href} title={pd.data[0].title} desc={pd.data[0].description} />
+            </React.Fragment>
+        )
+        this.setState({
+            pageCount: Math.ceil(data.length / this.state.perPage),
+            postData
+        });
+    }
+    UpdatePostDataVideo(){
+        const data = this.state.currentFetchedRes;
+        const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
+        //console.log(slice);
+        var postData;
+        postData = slice.map(pd => 
+            <React.Fragment>
+                <ShowVideo vidMetadata={pd.href} key={pd.href} title={pd.data[0].title} desc={pd.data[0].description} id={pd.data[0].nasa_id}/>
+            </React.Fragment>
+            
+        )
+        this.setState({
+            pageCount: Math.ceil(data.length / this.state.perPage),
+            postData
+        });
+    }
     receivedData() {
         if(!this.state.isNextPage){
-            const data = this.state.currentFetchedRes;
-            const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
-            //console.log(slice);
-            var postData;
-
             if(this.props.media_type==="image"){
-                postData = slice.map(pd => 
-                    <React.Fragment>
-                        <Image url={pd.links[0].href} key={pd.links[0].href} title={pd.data[0].title} desc={pd.data[0].description} />
-                    </React.Fragment>
-                ) 
+                this.UpdatePostDataImage();
             }
             else{
-                postData = slice.map(pd => 
-                    <React.Fragment>
-                        <ShowVideo vidMetadata={pd.href} key={pd.href} title={pd.data[0].title} desc={pd.data[0].description} id={pd.data[0].nasa_id}/>
-                    </React.Fragment>
-                    
-                ) 
+                this.UpdatePostDataVideo(); 
             }
-
-            this.setState({
-                pageCount: Math.ceil(data.length / this.state.perPage),
-                
-                postData
-            })
         }
         else{
             fetch(this.state.url)
@@ -100,31 +111,14 @@ export default class AppPage extends Component {
                 this.setState({currentFetchedRes:this.state.currentFetchedRes.concat(res["collection"]["items"])});
                 this.setState({links:res["collection"].links});
                 console.log(this.state);
-                const data = this.state.currentFetchedRes;
-                const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
-                var postData;
-
+                
                 if(this.props.media_type==="image"){
-                    postData = slice.map(pd => 
-                        <React.Fragment>
-                            <Image url={pd.links[0].href} key={pd.links[0].href} title={pd.data[0].title} desc={pd.data[0].description} />
-                        </React.Fragment>
-                    ) 
+                    this.UpdatePostDataImage();
                 }
                 else{
-                    postData = slice.map(pd => 
-                        <React.Fragment>
-                            <ShowVideo vidMetadata={pd.href} key={pd.href} title={pd.data[0].title} desc={pd.data[0].description} id={pd.data[0].nasa_id}/>
-                        </React.Fragment>
-                    ) 
+                    this.UpdatePostDataVideo(); 
                 }
-                
-
-                this.setState({
-                    pageCount: Math.ceil(data.length / this.state.perPage),
-                    isNextPage:false,
-                    postData
-                });
+            
             });
         }
     }
