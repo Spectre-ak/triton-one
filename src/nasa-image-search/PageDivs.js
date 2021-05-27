@@ -58,6 +58,20 @@ export default class AppPage extends Component {
             .handlePageClick
             .bind(this);
     }
+    UpdateState(fl,postData,data){
+        if(fl)
+            this.setState({
+                pageCount: Math.ceil(data.length / this.state.perPage),
+                isNextPage:false,
+                postData
+            });
+        else
+            this.setState({
+                pageCount: Math.ceil(data.length / this.state.perPage),
+                
+                postData
+            });
+    }
     UpdatePostDataImage(fl){
         const data = this.state.currentFetchedRes;
         const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
@@ -68,18 +82,7 @@ export default class AppPage extends Component {
                 <Image url={pd.links[0].href} key={pd.links[0].href} title={pd.data[0].title} desc={pd.data[0].description} />
             </React.Fragment>
         );
-        if(fl)
-        this.setState({
-            pageCount: Math.ceil(data.length / this.state.perPage),
-            isNextPage:false,
-            postData
-        });
-        else
-        this.setState({
-            pageCount: Math.ceil(data.length / this.state.perPage),
-            
-            postData
-        });
+        this.UpdateState(fl,postData,data);
     }
     UpdatePostDataVideo(fl){
         const data = this.state.currentFetchedRes;
@@ -92,18 +95,7 @@ export default class AppPage extends Component {
             </React.Fragment>
             
         );
-        if(fl)
-        this.setState({
-            pageCount: Math.ceil(data.length / this.state.perPage),
-            isNextPage:false,
-            postData
-        });
-        else
-        this.setState({
-            pageCount: Math.ceil(data.length / this.state.perPage),
-            
-            postData
-        });
+        this.UpdateState(fl,postData,data);
     }
     receivedData() {
         if(!this.state.isNextPage){
