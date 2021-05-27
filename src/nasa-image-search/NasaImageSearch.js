@@ -17,6 +17,7 @@ function Image(props){
 				<summary style={{outline: "none"}} id="detailsId">Read more</summary> 
 				{desc}
 			</details>
+			
 		</div>
 	)
 }
@@ -102,6 +103,37 @@ class NasaApi extends React.Component{
 			</div>
 		)
 	}
+	componentDidMount(){
+		try{
+            var url=(window.location.href);
+            url=url.split("/library/")[1];
+            console.log(url);
+            const param=url.split("~search~");
+            console.log(param);
+            if(param[0]==="image"){
+                document.getElementById("inlineRadio1").click();
+            }
+            else{//alert("as");
+                document.getElementById("inlineRadio2").click();
+            }
+            if(param[1]!=="")
+                document.getElementById("searchIDDescription").value=param[1];
+            console.log(param[1]==="")
+            console.log(this.state);
+        }
+        catch(err){
+            document.getElementById("inlineRadio1").click();
+        }
+        const interval=setInterval(() => {
+           try{
+                 this.onChangeInput();
+             }
+             catch(err){
+                 console.log(err);
+             }
+             clearInterval(interval);
+         }, 500);
+	}
 	onChangeInput(ele){
 		
 		//const topic=encodeURI(document.getElementById("searchIDTopic").value);
@@ -115,6 +147,7 @@ class NasaApi extends React.Component{
 		ReactDOM.unmountComponentAtNode(document.getElementById("divForResults"));
         ReactDOM.render(<AppPage topic={""} desc={desc} keywords={ded} media_type={media_type}/>,document.getElementById("divForResults"));
 		
+		window.history.pushState('',"","/library/"+media_type+"~search~"+ded);
 	}
 	getOption=(e)=>{
         this.state.ops=e;

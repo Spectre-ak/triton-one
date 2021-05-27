@@ -27,6 +27,11 @@ class ImageHubble extends React.Component{
                     }
                 });
                 console.log(image_files)
+                if(image_files.length===0){
+                    this.setState({Title:res.name,Desc:res.description,
+                        Files:image_files, optionsToBeRendered:<a>Image not found</a>});
+                    return;
+                }
                 const optionsToBeRendered=<QualityHubble getOption={this.getOption} Files={image_files}/>;
                 this.setState({Title:res.name,Desc:res.description,
                     Files:image_files, optionsToBeRendered:optionsToBeRendered});
@@ -50,9 +55,9 @@ class ImageHubble extends React.Component{
     }
     getOption=(e)=>{
         this.state.ops=e;
-        console.log(e);
+        //console.log(e);
         this.state.Files.forEach(element => {
-            if(e===element.file_size)
+            if(e===element.file_url)
                 this.setState({Url:element.file_url})
         });
     };

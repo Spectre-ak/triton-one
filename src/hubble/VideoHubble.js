@@ -10,19 +10,24 @@ function RadioOption(props){
     )
 }
 function QualityHubble(props) {
-    const [ops, setCount] = useState(props.Files[0].file_size);
+    const [ops, setCount] = useState(props.Files[0].file_url);
     useEffect(() => {
         //console.log(ops);
         props.getOption(ops);
     });
     let availableQuality=[];let index=0;
+    let isPresent=[];
     props.Files.forEach(element => {
-        if(index==0){
+        if(isPresent.includes(element.height+"x"+element.width)){}
+        else if(index==0){
             index++;
-            availableQuality.push(<RadioOption id={element.file_size} defaultChecked={true} height={element.height} width={element.width} setCount={setCount}/>)
+            availableQuality.push(<RadioOption id={element.file_url}  defaultChecked={true} height={element.height} width={element.width} setCount={setCount}/>);
+            isPresent.push(element.height+"x"+element.width);
         }
-        else
-            availableQuality.push(<RadioOption id={element.file_size} height={element.height} width={element.width} setCount={setCount}/>)
+        else{
+            availableQuality.push(<RadioOption id={element.file_url}  height={element.height} width={element.width} setCount={setCount}/>);
+            isPresent.push(element.height+"x"+element.width);
+        }
     });
  
     return (
@@ -71,9 +76,9 @@ class VideoHubble extends React.Component{
     }
     getOption=(e)=>{
         this.state.ops=e;
-        console.log(e);
+        //console.log(e);
         this.state.videoFiles.forEach(element => {
-            if(e===element.file_size)
+            if(e===element.file_url)
                 this.setState({videoUrl:element.file_url})
         });
     };

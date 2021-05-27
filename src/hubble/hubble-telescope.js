@@ -10,7 +10,7 @@ function ImageVidOps(props) {
         props.getOption(ops);
     });
     return (
-        <div>
+        <form>
             <div class="form-check form-check-inline" onClick={() => setCount(1)} > 
                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultChecked/>
                 <label class="form-check-label" for="inlineRadio1" >Images</label>
@@ -19,7 +19,7 @@ function ImageVidOps(props) {
                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
                 <label class="form-check-label" for="inlineRadio2">Videos</label>
             </div>
-        </div>
+        </form>
     )
 }
 
@@ -39,7 +39,35 @@ class HubbleTelescope extends React.Component {
     }
     
     componentDidMount(){
-        //document.getElementById("instantTrigger").click
+        try{
+            var url=(window.location.href);
+            url=url.split("/hubble-gallery/")[1];
+            console.log(url);
+            const param=url.split("~search~");
+            console.log(param);
+            if(param[0]==="image"){
+                document.getElementById("inlineRadio1").click();
+            }
+            else{//alert("as");
+                document.getElementById("inlineRadio2").click();
+            }
+            if(param[1]!=="")
+                document.getElementById("searchIDDescription").value=param[1];
+            console.log(param[1]==="")
+            console.log(this.state);
+        }
+        catch(err){
+            document.getElementById("inlineRadio1").click();
+        }
+        const interval=setInterval(() => {
+           try{
+                 this.loadResults();
+             }
+             catch(err){
+                 console.log(err);
+             }
+             clearInterval(interval);
+         }, 500);
     }
     render() {
         return (
@@ -55,17 +83,26 @@ class HubbleTelescope extends React.Component {
 					<button className="btn btn-primary" id="instantTrigger" onClick={this.loadResults}>Search...</button>
 				</p>
                 <br/>
+                
                 <div id="divForResults">
                     
                 </div>
+                
+                
             </div>
         )
     }
     loadResults(){
         ReactDOM.unmountComponentAtNode(document.getElementById("divForResults"));
-        ReactDOM.render(<PaginationHubble urlToFetch={this.state.urlToFetch} media_type={this.state.ops===1?"image":"video"}
-            search={document.getElementById("searchIDDescription").value}/>,document.getElementById("divForResults"));
-		
+        const searchParam=document.getElementById("searchIDDescription").value;
+        const media_type=this.state.ops===1?"image":"video";
+        ReactDOM.render(<PaginationHubble urlToFetch={this.state.urlToFetch} media_type={media_type}
+            search={searchParam}/>,document.getElementById("divForResults"));
+        
+        
+		window.history.pushState('',"","/hubble-gallery/"+media_type+"~search~"+searchParam);
+            
+
     }
     getOption=(e)=>{
         this.state.ops=e;

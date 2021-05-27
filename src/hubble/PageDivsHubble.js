@@ -82,12 +82,12 @@ class PaginationHubble extends React.Component {
             else {
                 const postData = slice.map(pd => <React.Fragment><VideoHubble id={pd.id} key={pd.id}/></React.Fragment>)
 
-
                 this.setState({
                     pageCount: Math.ceil(this.state.data.length / this.state.perPage),
 
                     postData
                 });
+
             }
         }
 
@@ -107,6 +107,7 @@ class PaginationHubble extends React.Component {
     };
     componentDidMount() {
         // this.fetchResults();
+        console.log(this.props)
         this.receivedData();
     }
     render() {
