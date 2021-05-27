@@ -44,7 +44,7 @@ class VideoHubble extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            videoUrl:<LoaderButtom/>,videoTitle:<LoaderButtom/>,videoDesc:<LoaderButtom/>,videoFiles:["a"],optionsToBeRendered:<LoaderButtom/>
+            videoUrl:<LoaderButtom/>,videoTitle:<LoaderButtom/>,videoDesc:<LoaderButtom/>,videoFiles:["a"],optionsToBeRendered:<LoaderButtom/>,VideoTitleText:"."
         }
     }
     fetchMediaContent(id){
@@ -55,7 +55,7 @@ class VideoHubble extends React.Component{
                 //direct html_5 option is available
                 const optionsToBeRendered=<QualityHubble getOption={this.getOption} Files={res.video_files}/>;
                 this.setState({videoTitle:res.name,videoDesc:res.short_description,
-                    videoFiles:res.video_files, optionsToBeRendered:optionsToBeRendered});
+                    videoFiles:res.video_files, VideoTitleText:res.name, optionsToBeRendered:optionsToBeRendered});
             });
     }
     componentDidMount(){
@@ -64,13 +64,32 @@ class VideoHubble extends React.Component{
     render(){
         return(
             <React.Fragment>
-                <h5>{this.state.videoTitle}</h5>
+                <br/>
+                <h5>{this.state.videoTitle}</h5><br/>
                 <video style={{width:"100%",height:"auto"}} src={this.state.videoUrl} controls/>
                 {this.state.optionsToBeRendered}
-                <details style={{padding:"6px"}} >
+
+                {/* <details style={{padding:"6px"}} >
                     <summary style={{outline: "none"}} >Read more</summary> 
                     {this.state.videoDesc}
-                </details>
+                </details> */}
+
+                <br/>
+                <a style={{display:"none"}}>
+                {
+                    this.state.unid=this.state.VideoTitleText.replace(/[^a-z]/gi,'')
+                }
+                </a>
+                
+                <h6><a  data-toggle="collapse" href={"#"+this.state.unid} role="button" aria-expanded="false" aria-controls={this.state.unid}>{this.state.VideoTitleText+"...read more"}</a></h6>
+                <div class="collapse multi-collapse" id={this.state.unid}>
+                    <div class="card card-body">
+                        {this.state.videoDesc}
+                    </div>
+                </div>
+
+
+                
             </React.Fragment>
         )
     }

@@ -46,10 +46,12 @@ class ImageHubble extends React.Component{
                 <h5>{this.state.Title}</h5>
                 <img className="img-fluid" src={this.state.Url} controls/>
                 {this.state.optionsToBeRendered}
+
                 <details style={{padding:"6px"}} >
                     <summary style={{outline: "none"}} >Read more</summary> 
                     {this.state.Desc}
                 </details>
+                
             </React.Fragment>
         )
     }

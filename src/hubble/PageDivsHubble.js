@@ -114,7 +114,7 @@ class PaginationHubble extends React.Component {
         return (
             <div className="container">
                 {this.state.postData}
-                
+                <br/>
                 <ReactPaginate
                     previousLabel={"prev"}
                     nextLabel={"next"}
