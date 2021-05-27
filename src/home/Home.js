@@ -4,7 +4,7 @@ import Loader from '../Loader';
 import ReactDOM from "react-dom";
 function ImageWithLabel(props){
     return(
-        <div>
+        <div style={{textAlign:"center"}}>
             <br/>
             <h4>{props.title}</h4>
             <div id={props.unid+"imgLoader"}><Loader/></div>
@@ -36,7 +36,7 @@ export default class Home extends React.Component {
         this.handlePageClick = this
             .handlePageClick
             .bind(this);
-    }sdfffffffffffffffffffff
+    }
     componentDidMount() {
         //this.fetchAPODRandom();
         this.receivedData();
