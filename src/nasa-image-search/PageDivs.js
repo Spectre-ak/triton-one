@@ -58,7 +58,7 @@ export default class AppPage extends Component {
             .handlePageClick
             .bind(this);
     }
-    UpdatePostDataImage(){
+    UpdatePostDataImage(fl){
         const data = this.state.currentFetchedRes;
         const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
         //console.log(slice);
@@ -67,13 +67,21 @@ export default class AppPage extends Component {
             <React.Fragment>
                 <Image url={pd.links[0].href} key={pd.links[0].href} title={pd.data[0].title} desc={pd.data[0].description} />
             </React.Fragment>
-        )
+        );
+        if(fl)
         this.setState({
             pageCount: Math.ceil(data.length / this.state.perPage),
+            isNextPage:false,
+            postData
+        });
+        else
+        this.setState({
+            pageCount: Math.ceil(data.length / this.state.perPage),
+            
             postData
         });
     }
-    UpdatePostDataVideo(){
+    UpdatePostDataVideo(fl){
         const data = this.state.currentFetchedRes;
         const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
         //console.log(slice);
@@ -83,20 +91,39 @@ export default class AppPage extends Component {
                 <ShowVideo vidMetadata={pd.href} key={pd.href} title={pd.data[0].title} desc={pd.data[0].description} id={pd.data[0].nasa_id}/>
             </React.Fragment>
             
-        )
+        );
+        if(fl)
         this.setState({
             pageCount: Math.ceil(data.length / this.state.perPage),
+            isNextPage:false,
+            postData
+        });
+        else
+        this.setState({
+            pageCount: Math.ceil(data.length / this.state.perPage),
+            
             postData
         });
     }
     receivedData() {
         if(!this.state.isNextPage){
+            // const data = this.state.currentFetchedRes;
+            // const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
+            // //console.log(slice);
+            // var postData;
+
             if(this.props.media_type==="image"){
-                this.UpdatePostDataImage();
+                this.UpdatePostDataImage(false); 
             }
             else{
-                this.UpdatePostDataVideo(); 
+                this.UpdatePostDataVideo(false);
             }
+
+            // this.setState({
+            //     pageCount: Math.ceil(data.length / this.state.perPage),
+                
+            //     postData
+            // })
         }
         else{
             fetch(this.state.url)
@@ -111,14 +138,19 @@ export default class AppPage extends Component {
                 this.setState({currentFetchedRes:this.state.currentFetchedRes.concat(res["collection"]["items"])});
                 this.setState({links:res["collection"].links});
                 console.log(this.state);
-                
                 if(this.props.media_type==="image"){
-                    this.UpdatePostDataImage();
+                    this.UpdatePostDataImage(true); 
                 }
                 else{
-                    this.UpdatePostDataVideo(); 
+                    this.UpdatePostDataVideo(true);
                 }
-            
+                
+
+                // this.setState({
+                //     pageCount: Math.ceil(data.length / this.state.perPage),
+                //     isNextPage:false,
+                //     postData
+                // });
             });
         }
     }
