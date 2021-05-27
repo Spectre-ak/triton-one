@@ -102,11 +102,13 @@ class ShowVideo extends React.Component{
             <React.Fragment>
                 <h4>{this.props.title}</h4>
                 <video style={{width:"100%",height:"auto"}} src={this.state.videoUrl} controls/>
-                {this.state.toBeRendered}
-                <details style={{padding:"6px"}} >
-                    <summary style={{outline: "none"}} >Read more</summary> 
-                    {this.props.desc}
-                </details>
+                {this.state.toBeRendered}<br/>
+                <h6><a  data-toggle="collapse" href={"#"+this.props.unid} role="button" aria-expanded="false" aria-controls={this.props.unid}>{this.props.title+"...read more"}</a></h6>
+                <div class="collapse multi-collapse" id={this.props.unid}>
+                    <div class="card card-body">
+                        {this.props.desc}
+                    </div>
+                </div>
                 <hr/>
             </React.Fragment>
         )
