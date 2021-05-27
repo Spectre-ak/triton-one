@@ -86,14 +86,14 @@ code {
     }
     
     ::-webkit-scrollbar-track {
-      background: #0b0b0c00;
-      border-radius: 10px
+      background: #121212;
+      /* border-radius: 10px */
     }
     
     ::-webkit-scrollbar-thumb {
       background: red;
       border-radius: 10px;
-      background: rgb(102 95 95/ 30%)
+      background: rgb(213 206 206 / 30%);
     }
     
     ::-webkit-scrollbar-thumb:hover {
