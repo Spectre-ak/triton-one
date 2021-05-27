@@ -88,7 +88,7 @@ code {
     ::-webkit-scrollbar-track {
       background: #121212;
       /* border-radius: 10px */
-    }
+    } 
     
     ::-webkit-scrollbar-thumb {
       background: red;
