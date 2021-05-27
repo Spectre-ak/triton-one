@@ -9,6 +9,7 @@ import HubbleTelescope from "../hubble/hubble-telescope";
 import NasaApi from "../nasa-image-search/NasaImageSearch";
 import NasaMarsApi from "../nasa-mars-images/MarsImages";
 import News from "../news/News";
+import Home from "../home/Home";
 export default function Navbar(){
     return (
         <Router>
@@ -16,7 +17,7 @@ export default function Navbar(){
         
       <div className="container-fluid">
           <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
-            <a href="/" class="navbar-brand d-flex mr-auto">Navbar 3 
+            <a href="/" class="navbar-brand d-flex mr-auto"><big><big>Triton</big></big> 
             <span></span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
@@ -90,17 +91,3 @@ export default function Navbar(){
         
       );
 }
-
-
-function Home() {
-    return <h2>Home</h2>;
-  }
-  
-  function About() {
-    return <h2>About</h2>;
-  }
-  
-  function Users() {
-    return <h2>Users</h2>;
-  }
-

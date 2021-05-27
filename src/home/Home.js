@@ -8,7 +8,7 @@ export default class Home extends React.Component{
     render(){
         return(
             <React.Fragment>
-                
+                <a>how u doing</a>
             </React.Fragment>
         )
     }
