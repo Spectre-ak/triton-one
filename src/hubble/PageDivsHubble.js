@@ -96,7 +96,7 @@ class PaginationHubble extends React.Component {
     handlePageClick = (e) => {
         const selectedPage = e.selected;
         const offset = selectedPage * this.state.perPage;
-
+        console.log(selectedPage);
         this.setState({
             currentPage: selectedPage,
             offset: offset

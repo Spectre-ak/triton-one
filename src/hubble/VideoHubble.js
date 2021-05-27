@@ -44,7 +44,7 @@ class VideoHubble extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            videoUrl:<LoaderButtom/>,videoTitle:<LoaderButtom/>,videoDesc:<LoaderButtom/>,videoFiles:["a"],optionsToBeRendered:<LoaderButtom/>,VideoTitleText:"."
+            videoUrl:"...",videoTitle:<LoaderButtom/>,videoDesc:<LoaderButtom/>,videoFiles:["a"],optionsToBeRendered:<LoaderButtom/>,VideoTitleText:"."
         }
     }
     fetchMediaContent(id){
@@ -52,6 +52,11 @@ class VideoHubble extends React.Component{
         fetch("https://triton-one-backend.azurewebsites.net/hubble/video/"+id).then(response=>response.json())
         .then(res=>{
                 console.log(res);
+                if(res.video_files===undefined){
+                    this.setState({videoTitle:res.name,videoDesc:res.short_description,
+                        videoFiles:res.video_files, VideoTitleText:res.name, optionsToBeRendered:<a>Not found...</a>});
+                    return;
+                }
                 //direct html_5 option is available
                 const optionsToBeRendered=<QualityHubble getOption={this.getOption} Files={res.video_files}/>;
                 this.setState({videoTitle:res.name,videoDesc:res.short_description,
@@ -61,6 +66,7 @@ class VideoHubble extends React.Component{
     componentDidMount(){
         this.fetchMediaContent(this.props.id);
     }
+    
     render(){
         return(
             <React.Fragment>
@@ -77,7 +83,7 @@ class VideoHubble extends React.Component{
                 <br/>
                 <a style={{display:"none"}}>
                 {
-                    this.state.unid=this.state.VideoTitleText.replace(/[^a-z]/gi,'')
+                    this.state.unid=this.state.videoUrl.replace(/\W/g,'')
                 }
                 </a>
                 

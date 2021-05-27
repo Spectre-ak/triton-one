@@ -11,14 +11,14 @@ class ImageHubble extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            Url:<LoaderButtom/>,Title:<LoaderButtom/>,Desc:"-",Files:["a"],optionsToBeRendered:<LoaderButtom/>,ImageTitle:"."
+            Url:"...",Title:<LoaderButtom/>,Desc:"-",Files:["a"],optionsToBeRendered:<LoaderButtom/>,ImageTitle:"."
         }
     }
     fetchMediaContent(id){
         fetch("https://triton-one-backend.azurewebsites.net/hubble/image/"+id).then(response=>response.json())
         //fetch("http://localhost:8080/hubble/image/"+id).then(response=>response.json())
             .then(res=>{
-                console.log(res);
+                //console.log(res);
                 //direct html_5 option is available
                 const image_files=[];
                 res.image_files.forEach(element => {
@@ -27,7 +27,7 @@ class ImageHubble extends React.Component{
                         image_files.push(element);
                     }
                 });
-                console.log(image_files)
+                //console.log(image_files)
                 if(image_files.length===0){
                     this.setState({Title:res.name,Desc:res.description,
                         Files:image_files, optionsToBeRendered:<a>Image not found</a>});
@@ -46,12 +46,12 @@ class ImageHubble extends React.Component{
             <React.Fragment>
                 <a style={{display:"none"}}>
                 {
-                    this.state.unid=this.state.ImageTitle.replace(/[^a-z]/gi,'')
+                    this.state.unid=this.state.Url.replace(/[^a-z]/gi,'')+this.state.ImageTitle.replace(/[^a-z]/gi,'')
                 }
                 </a>
 
                 <h5>{this.state.Title}</h5><br/>
-                <div id={this.state.unid+"imgLoader"}><Loader/></div>
+                
                 <img className="img-fluid" src={this.state.Url} controls onLoad={()=>{}}/><br/>
                 {this.state.optionsToBeRendered}
 
@@ -66,7 +66,7 @@ class ImageHubble extends React.Component{
                 <h6><a  data-toggle="collapse" href={"#"+this.state.unid} role="button" aria-expanded="false" aria-controls={this.state.unid}>{this.state.ImageTitle+"...read more"}</a></h6>
                 <div class="collapse multi-collapse" id={this.state.unid}>
                     <div class="card card-body">
-                        {this.state.desc}
+                        {this.state.Desc}
                     </div>
                 </div>
                 <br/>
