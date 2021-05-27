@@ -8,6 +8,7 @@ import {
 import HubbleTelescope from "../hubble/hubble-telescope";
 import NasaApi from "../nasa-image-search/NasaImageSearch";
 import NasaMarsApi from "../nasa-mars-images/MarsImages";
+import News from "../news/News";
 export default function Navbar(){
     return (
         <Router>
@@ -26,7 +27,7 @@ export default function Navbar(){
                 <li class="nav-item">
                   {/* <a class="nav-link" href="#"></a>
                    */}
-                  <Link class="nav-link" to="/image-library">Image Library</Link>
+                  <Link class="nav-link" to="/library">Media Library</Link>
                 </li>
                 <li class="nav-item">
                   {/* <a class="nav-link" href="#">Mars Images</a>
@@ -67,7 +68,7 @@ export default function Navbar(){
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/image-library">
+          <Route path="/library">
             <NasaApi />
           </Route>
           <Route path="/mars-images">
@@ -77,7 +78,7 @@ export default function Navbar(){
             <HubbleTelescope/>
           </Route>
           <Route path="/articles">
-            <h4>Articles</h4>
+            <News/>
           </Route>
 
           <Route path="/">
