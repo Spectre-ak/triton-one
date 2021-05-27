@@ -29,7 +29,7 @@ code {
 	border-radius: 100%;
 	width: 60px;
 	height: 60px;
-	animation: spin 1s linear infinite
+	animation: spin 0.4s linear infinite
 }
  @keyframes spin {
       0% { transform: rotate(0deg); }
@@ -53,6 +53,7 @@ code {
       display: flex;
       list-style: none;
       outline: none;
+      
     }
     .pagination > .active > a{
       background-color: #47ccde ;
