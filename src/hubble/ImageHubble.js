@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Loader from '../Loader';
 import LoaderButtom from '../LoaderButton';
 import { QualityHubble } from './VideoHubble';
 
@@ -10,7 +11,7 @@ class ImageHubble extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            Url:<LoaderButtom/>,Title:<LoaderButtom/>,Desc:"-",Files:["a"],optionsToBeRendered:<LoaderButtom/>
+            Url:<LoaderButtom/>,Title:<LoaderButtom/>,Desc:"-",Files:["a"],optionsToBeRendered:<LoaderButtom/>,ImageTitle:"."
         }
     }
     fetchMediaContent(id){
@@ -33,7 +34,7 @@ class ImageHubble extends React.Component{
                     return;
                 }
                 const optionsToBeRendered=<QualityHubble getOption={this.getOption} Files={image_files}/>;
-                this.setState({Title:res.name,Desc:res.description,
+                this.setState({Title:res.name,Desc:res.description,ImageTitle:res.name,
                     Files:image_files, optionsToBeRendered:optionsToBeRendered});
             });
     }
@@ -43,15 +44,32 @@ class ImageHubble extends React.Component{
     render(){
         return(
             <React.Fragment>
-                <h5>{this.state.Title}</h5>
-                <img className="img-fluid" src={this.state.Url} controls/>
+                <a style={{display:"none"}}>
+                {
+                    this.state.unid=this.state.ImageTitle.replace(/[^a-z]/gi,'')
+                }
+                </a>
+
+                <h5>{this.state.Title}</h5><br/>
+                <div id={this.state.unid+"imgLoader"}><Loader/></div>
+                <img className="img-fluid" src={this.state.Url} controls onLoad={()=>{}}/><br/>
                 {this.state.optionsToBeRendered}
 
-                <details style={{padding:"6px"}} >
+                {/* <details style={{padding:"6px"}} >
                     <summary style={{outline: "none"}} >Read more</summary> 
                     {this.state.Desc}
-                </details>
+                </details> */}
+
+                <br/>
                 
+                
+                <h6><a  data-toggle="collapse" href={"#"+this.state.unid} role="button" aria-expanded="false" aria-controls={this.state.unid}>{this.state.ImageTitle+"...read more"}</a></h6>
+                <div class="collapse multi-collapse" id={this.state.unid}>
+                    <div class="card card-body">
+                        {this.state.desc}
+                    </div>
+                </div>
+                <br/>
             </React.Fragment>
         )
     }

@@ -45,7 +45,7 @@ export default class Home extends React.Component {
         const slice = this.state.data.slice(this.state.offset, this.state.offset + this.state.perPage)
         console.log(slice);
         const postData = slice.map(pd =>
-            <ImageWithLabel url={pd.url} title={pd.title} desc={pd.explanation} unid={pd.title.replace(/[^a-z]/gi,'')} key={pd.title.replace(/[^a-z]/gi,'')}/>
+            <ImageWithLabel url={pd.url} title={pd.title} desc={pd.explanation} unid={pd.url.replace(/\W/g,'')} key={pd.title.replace(/[^a-z]/gi,'')}/>
         )
         console.log(this.state.data.length);
         this.setState({

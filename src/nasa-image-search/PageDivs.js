@@ -80,7 +80,7 @@ export default class AppPage extends Component {
         var postData;
         postData = slice.map(pd => 
             <React.Fragment>
-                <ImageWithLabel url={pd.links[0].href} key={pd.links[0].href} title={pd.data[0].title} unid={pd.data[0].title.replace(/[^a-z]/gi,'')} desc={pd.data[0].description} />
+                <ImageWithLabel url={pd.links[0].href} key={pd.links[0].href} title={pd.data[0].title} unid={pd.links[0].href.replace(/\W/g,'')} desc={pd.data[0].description} />
             </React.Fragment>
         );
         this.UpdateState(fl,postData,data);
@@ -92,7 +92,7 @@ export default class AppPage extends Component {
         var postData;
         postData = slice.map(pd => 
             <React.Fragment>
-                <ShowVideo vidMetadata={pd.href} key={pd.href} title={pd.data[0].title} unid={pd.data[0].title.replace(/[^a-z]/gi,'')} desc={pd.data[0].description} id={pd.data[0].nasa_id}/>
+                <ShowVideo vidMetadata={pd.href} key={pd.href} title={pd.data[0].title} unid={pd.links[0].href.replace(/\W/g,'')} desc={pd.data[0].description} id={pd.data[0].nasa_id}/>
             </React.Fragment>
             
         );
