@@ -14,7 +14,8 @@ class ImageHubble extends React.Component{
         }
     }
     fetchMediaContent(id){
-        fetch("http://localhost:8080/hubble/image/"+id).then(response=>response.json())
+        fetch("https://triton-one-backend.azurewebsites.net/hubble/image/"+id).then(response=>response.json())
+        //fetch("http://localhost:8080/hubble/image/"+id).then(response=>response.json())
             .then(res=>{
                 console.log(res);
                 //direct html_5 option is available

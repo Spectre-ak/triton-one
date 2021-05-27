@@ -31,7 +31,9 @@ class HubbleTelescope extends React.Component {
         super(props);
         this.state = { show: "false",ops:2 };
         this.state = {
-            urlToFetch:"http://localhost:8080/hubble/images"
+            //urlToFetch:"http://localhost:8080/hubble/images" https://triton-one-backend.azurewebsites.net/
+            urlToFetch:"https://triton-one-backend.azurewebsites.net/hubble/images" 
+            
         };
         this.loadResults=this.loadResults.bind(this);
     }
@@ -68,9 +70,9 @@ class HubbleTelescope extends React.Component {
     getOption=(e)=>{
         this.state.ops=e;
         if(e===1)
-            this.state.urlToFetch="http://localhost:8080/hubble/images";
+            this.state.urlToFetch="https://triton-one-backend.azurewebsites.net/hubble/images";
         else
-            this.state.urlToFetch="http://localhost:8080/hubble/videos";
+            this.state.urlToFetch="https://triton-one-backend.azurewebsites.net/hubble/videos";
         
     };
 

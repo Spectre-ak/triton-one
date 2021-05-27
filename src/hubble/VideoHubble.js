@@ -43,8 +43,9 @@ class VideoHubble extends React.Component{
         }
     }
     fetchMediaContent(id){
-        fetch("http://localhost:8080/hubble/video/"+id).then(response=>response.json())
-            .then(res=>{
+        //fetch("http://localhost:8080/hubble/video/"+id).then(response=>response.json())
+        fetch("https://triton-one-backend.azurewebsites.net/hubble/video/"+id).then(response=>response.json())
+        .then(res=>{
                 console.log(res);
                 //direct html_5 option is available
                 const optionsToBeRendered=<QualityHubble getOption={this.getOption} Files={res.video_files}/>;
