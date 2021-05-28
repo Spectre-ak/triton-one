@@ -2,6 +2,7 @@ import React from "react";
 import ReactPaginate from 'react-paginate';
 import Loader from '../Loader';
 import ReactDOM from "react-dom";
+import LoaderButtom from "../LoaderButton";
 function ImageWithLabel(props){
     return(
         <div style={{textAlign:"center"}}>
@@ -31,7 +32,7 @@ export default class Home extends React.Component {
             currentPage: 0,
             urlToFetch: this.props.urlToFetch,
             isFetched: false,
-            postData: <Loader/>
+            postData: <Loader/>,loadmoreStatus:" ",marginPagesDisplayed:0,pageRangeDisplayed:0
         };
         this.handlePageClick = this
             .handlePageClick
@@ -40,6 +41,22 @@ export default class Home extends React.Component {
     componentDidMount() {
         //this.fetchAPODRandom();
         this.receivedData();
+        console.log(window.innerWidth, window.innerHeight);
+        const innerWidth=window.innerWidth;
+        let factor=1;
+        if(innerWidth<=350){
+            factor=1;
+        }
+        else if(innerWidth<=600){
+            factor=2;
+        }
+        else if(innerWidth<=850){
+            factor=3;
+        }
+        else{
+            factor=4;
+        }
+        this.setState({marginPagesDisplayed:factor,pageRangeDisplayed:factor});
     }
     UpdatePostData(){
         const slice = this.state.data.slice(this.state.offset, this.state.offset + this.state.perPage)
@@ -95,7 +112,7 @@ export default class Home extends React.Component {
         const offset = selectedPage * this.state.perPage;
         if(selectedPage===this.state.pageCount-2 || selectedPage===this.state.pageCount-1){
             console.log("load more");this.fetchAPODRandomMore();
-            this.setState({loadmoreStatus:"Loading More..."});
+            this.setState({loadmoreStatus:<LoaderButtom/>});
         }
         this.setState({
             currentPage: selectedPage,postData:<Loader/>,
@@ -113,15 +130,15 @@ export default class Home extends React.Component {
                 <h4>Random NASA's APOD API Images</h4>
                 {this.state.postData}
                 <br/>
-                <div style={{margin:"auto",width:"50%"}}>
+                <div className="container">
                     <ReactPaginate
-                        previousLabel={"Prev"}
-                        nextLabel={"Next"}
+                        previousLabel={<i class="fa fa-arrow-left" aria-hidden="true"></i>}
+                        nextLabel={<i class="fa fa-arrow-right" aria-hidden="true"></i>}
                         breakLabel={"..."}
                         breakClassName={"break-me"}
                         pageCount={this.state.pageCount}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
+                        marginPagesDisplayed={this.state.marginPagesDisplayed}
+                        pageRangeDisplayed={this.state.pageRangeDisplayed}
                         onPageChange={this.handlePageClick}
                         containerClassName={"pagination"}
                         subContainerClassName={"pages pagination"}
