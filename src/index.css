@@ -118,6 +118,46 @@ code {
 
 
 
+#news_card{
+  background-color: black;
+  color: white;
+  border: solid white 1px;
+
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#news_link{
+  color: white;
+}
+
+
+#news_image{
+	-webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+
+h1{color: whitesmoke;}
+
+#news_image:hover{
+  opacity: 0.95;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+
+#news_card:hover{
+  -webkit-transition: .2s ease-in-out;
+  transition: .3s ease-in-out;
+  border: solid rgb(124, 245, 245) 1px;
+  background-color: #000535;
+}
+
+
+
+
+
     /*
     navbar theme begins
     */
