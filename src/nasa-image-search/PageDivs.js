@@ -150,8 +150,7 @@ export default class AppPage extends Component {
     handlePageClick = (e) => {
         const selectedPage = e.selected;
         const offset = selectedPage * this.state.perPage;
-        console.log(this.state.pageCount
-            );
+        console.log(this.state.pageCount);
         if(selectedPage+1===this.state.pageCount){
             console.log("reached max size for current call");
             var urlNext="";
