@@ -32,7 +32,7 @@ export default class Home extends React.Component {
             currentPage: 0,
             urlToFetch: this.props.urlToFetch,
             isFetched: false,
-            postData: <Loader/>,loadmoreStatus:" ",marginPagesDisplayed:0,pageRangeDisplayed:0
+            postData: <Loader/>,loadmoreStatus:<LoaderButtom/>,marginPagesDisplayed:0,pageRangeDisplayed:0,loadmoreStatusMessage:"Loading.."
         };
         this.handlePageClick = this
             .handlePageClick
@@ -80,7 +80,7 @@ export default class Home extends React.Component {
                         currentData.push(element);
                     }
                 });
-                this.setState({ data: currentData,postData:<Loader/>,loadmoreStatus:"" });
+                this.setState({ data: currentData,postData:<Loader/>,loadmoreStatus:"",loadmoreStatusMessage:"Pages" });
                 this.UpdatePostData();
             });
     }
@@ -96,7 +96,7 @@ export default class Home extends React.Component {
                         }
                     });
                     console.log(filteredData)
-                    this.setState({ data: filteredData, isFetched: true });
+                    this.setState({ data: filteredData, isFetched: true,loadmoreStatusMessage:"Pages",loadmoreStatus:"" });
                     this.UpdatePostData();
 
                 });
@@ -112,7 +112,7 @@ export default class Home extends React.Component {
         const offset = selectedPage * this.state.perPage;
         if(selectedPage===this.state.pageCount-2 || selectedPage===this.state.pageCount-1){
             console.log("load more");this.fetchAPODRandomMore();
-            this.setState({loadmoreStatus:<LoaderButtom/>});
+            this.setState({loadmoreStatus:<LoaderButtom/>,loadmoreStatusMessage:"Loading.."});
         }
         this.setState({
             currentPage: selectedPage,postData:<Loader/>,
@@ -130,7 +130,9 @@ export default class Home extends React.Component {
                 <h4>Random NASA's APOD API Images</h4>
                 {this.state.postData}
                 <br/>
-                <div className="container">
+                <div className="container" style={{overflowX:"auto",overflowY:"hidden"}} >
+                    {this.state.loadmoreStatusMessage}{" "}{this.state.loadmoreStatus}
+                    <React.Fragment>{}</React.Fragment>
                     <ReactPaginate
                         previousLabel={<i class="fa fa-arrow-left" aria-hidden="true"></i>}
                         nextLabel={<i class="fa fa-arrow-right" aria-hidden="true"></i>}
@@ -142,11 +144,10 @@ export default class Home extends React.Component {
                         onPageChange={this.handlePageClick}
                         containerClassName={"pagination"}
                         subContainerClassName={"pages pagination"}
-                        activeClassName={"active"} /> <a id="loadMorePaginationUpdate">{this.state.loadmoreStatus}</a>
+                        activeClassName={"active"} /> 
                 </div>
-               
 
-
+               <br/>
             </div>
         )
     }
