@@ -187,3 +187,20 @@ h1{color: whitesmoke;}
       background-color: #262626;
     }
 
+
+    @media (prefers-reduced-motion: no-preference) {
+      #logoBrand {
+        animation: App-logo-spin infinite 1.5s cubic-bezier(0, 0, 1, -0.42);;
+         
+      }
+    }
+
+
+    @keyframes App-logo-spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(180deg);
+      }
+    }

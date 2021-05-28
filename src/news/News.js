@@ -38,6 +38,8 @@ class News extends React.Component{
                 
             }
             ReactDOM.render(results,document.getElementById("divREs"));
+        }).catch(function(error){
+            console.log(error);
         });
     }
     componentDidMount(){

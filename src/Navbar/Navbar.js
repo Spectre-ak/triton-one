@@ -10,6 +10,8 @@ import NasaApi from "../nasa-image-search/NasaImageSearch";
 import NasaMarsApi from "../nasa-mars-images/MarsImages";
 import News from "../news/News";
 import Home from "../home/Home";
+import img from "./logoRo.png";
+
 export default function Navbar(){
     return (
         <Router>
@@ -19,7 +21,7 @@ export default function Navbar(){
           <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
             <a href="/" class="navbar-brand d-flex mr-auto"><big><big>Triton</big></big> 
             <span></span>
-            </a>
+            </a> <img src={img} width="4%" id="logoBrand" style={{marginLeft:"4px"}}/>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
               <span class="navbar-toggler-icon"></span>
             </button>
