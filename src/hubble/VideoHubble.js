@@ -72,7 +72,7 @@ class VideoHubble extends React.Component{
             <React.Fragment>
                 <br/>
                 <h5>{this.state.videoTitle}</h5><br/>
-                <video style={{width:"100%",height:"auto"}} src={this.state.videoUrl} controls/>
+                <video style={{width:"100%",height:"auto"}} src={this.state.videoUrl} controls preload="metadata"/>
                 {this.state.optionsToBeRendered}
 
                 {/* <details style={{padding:"6px"}} >
