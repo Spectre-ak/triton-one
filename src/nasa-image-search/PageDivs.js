@@ -5,6 +5,7 @@ import { ImageWithLabel } from '../home/Home';
 
 import "../index.css";
 import Loader from '../Loader';
+import LoaderButtom from '../LoaderButton';
 import ShowVideo from './ShowVideo';
 var totalArr=[];
 
@@ -53,7 +54,7 @@ export default class AppPage extends Component {
             //url:"https://images-api.nasa.gov/search?q="+this.props.topic+"&media_type=image&page=1&description="+this.props.desc,
             url:"https://images-api.nasa.gov/search?keywords="+this.props.keywords+"&media_type="+this.props.media_type+"&page=1",
             isNextPage:true,
-            postData:<Loader/>
+            postData:<Loader/>,loadmoreStatus:<LoaderButtom/>,marginPagesDisplayed:0,pageRangeDisplayed:0,loadmoreStatusMessage:"Loading.."
         };
         this.handlePageClick = this
             .handlePageClick
@@ -129,7 +130,7 @@ export default class AppPage extends Component {
                     return;
                 }
                 this.setState({currentFetchedRes:this.state.currentFetchedRes.concat(res["collection"]["items"])});
-                this.setState({links:res["collection"].links});
+                this.setState({links:res["collection"].links, loadmoreStatusMessage:"Pages",loadmoreStatus:"" });
                 console.log(this.state);
                 if(this.props.media_type==="image"){
                     this.UpdatePostDataImage(true); 
@@ -161,7 +162,7 @@ export default class AppPage extends Component {
                     urlNext=(this.state.links[1]["href"]);
                 this.setState({
                     url:urlNext,
-                    isNextPage:true,
+                    isNextPage:true,loadmoreStatus:<LoaderButtom/>,loadmoreStatusMessage:"Loading.."
                 });
                 console.log(urlNext)
                 console.log(this.state);
@@ -182,24 +183,44 @@ export default class AppPage extends Component {
 
     componentDidMount() {
         console.log(this.props)
-        this.receivedData()
+        this.receivedData();
+        console.log(window.innerWidth, window.innerHeight);
+        const innerWidth=window.innerWidth;
+        let factor=1;
+        if(innerWidth<=350){
+            factor=1;
+        }
+        else if(innerWidth<=600){
+            factor=2;
+        }
+        else if(innerWidth<=850){
+            factor=3;
+        }
+        else{
+            factor=4;
+        }
+        this.setState({marginPagesDisplayed:factor,pageRangeDisplayed:factor});
     }
     render() {
         return (
             <div>
                 {this.state.postData}
-                <ReactPaginate
-                    previousLabel={"prev"}
-                    nextLabel={"next"}
-                    breakLabel={"..."}
-                    breakClassName={"break-me"}
-                    pageCount={this.state.pageCount}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={this.handlePageClick}
-                    containerClassName={"pagination"}
-                    subContainerClassName={"pages pagination"}
-                    activeClassName={"active"} />
+                <div className="container" style={{overflowX:"auto",overflowY:"hidden"}} >
+                    {this.state.loadmoreStatusMessage}{" "}{this.state.loadmoreStatus}
+                    <React.Fragment>{}</React.Fragment>
+                    <ReactPaginate
+                        previousLabel={<i class="fa fa-arrow-left" aria-hidden="true"></i>}
+                        nextLabel={<i class="fa fa-arrow-right" aria-hidden="true"></i>}
+                        breakLabel={"..."}
+                        breakClassName={"break-me"}
+                        pageCount={this.state.pageCount}
+                        marginPagesDisplayed={this.state.marginPagesDisplayed}
+                        pageRangeDisplayed={this.state.pageRangeDisplayed}
+                        onPageChange={this.handlePageClick}
+                        containerClassName={"pagination"}
+                        subContainerClassName={"pages pagination"}
+                        activeClassName={"active"} /> 
+                </div>
             </div>
         )
     }

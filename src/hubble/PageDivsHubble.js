@@ -4,6 +4,7 @@ import ImageHubble from './ImageHubble';
 import VideoHubble from './VideoHubble';
 import ReactDOM from 'react-dom';
 import Loader from '../Loader';
+import LoaderButtom from '../LoaderButton';
 class PaginationHubble extends React.Component {
 
     constructor(props) {
@@ -16,7 +17,7 @@ class PaginationHubble extends React.Component {
             currentPage: 0,
             urlToFetch: this.props.urlToFetch,
             isFetched: false,
-            postData: <Loader/>
+            postData: <Loader/>,loadmoreStatus:<LoaderButtom/>,marginPagesDisplayed:0,pageRangeDisplayed:0,loadmoreStatusMessage:"Loading.."
         };
         this.handlePageClick = this
             .handlePageClick
@@ -37,7 +38,7 @@ class PaginationHubble extends React.Component {
                         }
                     });
                     console.log(filteredData);
-                    this.setState({ data: filteredData, isFetched: true });
+                    this.setState({ data: filteredData, isFetched: true,loadmoreStatus:"",loadmoreStatusMessage:"Pages" });
                     const slice = this.state.data.slice(this.state.offset, this.state.offset + this.state.perPage)
 
                     if (this.props.media_type === "image") {
@@ -109,24 +110,45 @@ class PaginationHubble extends React.Component {
         // this.fetchResults();
         console.log(this.props)
         this.receivedData();
+        console.log(window.innerWidth, window.innerHeight);
+        const innerWidth=window.innerWidth;
+        let factor=1;
+        if(innerWidth<=350){
+            factor=1;
+        }
+        else if(innerWidth<=600){
+            factor=2;
+        }
+        else if(innerWidth<=850){
+            factor=3;
+        }
+        else{
+            factor=4;
+        }
+        this.setState({marginPagesDisplayed:factor,pageRangeDisplayed:factor});
+        
     }
     render() {
         return (
             <div className="container">
                 {this.state.postData}
                 <br/>
-                <ReactPaginate
-                    previousLabel={"prev"}
-                    nextLabel={"next"}
-                    breakLabel={"..."}
-                    breakClassName={"break-me"}
-                    pageCount={this.state.pageCount}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={this.handlePageClick}
-                    containerClassName={"pagination"}
-                    subContainerClassName={"pages pagination"}
-                    activeClassName={"active"} />
+                <div className="container" style={{overflowX:"auto",overflowY:"hidden"}} >
+                    {this.state.loadmoreStatusMessage}{" "}{this.state.loadmoreStatus}
+                    <React.Fragment>{}</React.Fragment>
+                    <ReactPaginate
+                        previousLabel={<i class="fa fa-arrow-left" aria-hidden="true"></i>}
+                        nextLabel={<i class="fa fa-arrow-right" aria-hidden="true"></i>}
+                        breakLabel={"..."}
+                        breakClassName={"break-me"}
+                        pageCount={this.state.pageCount}
+                        marginPagesDisplayed={this.state.marginPagesDisplayed}
+                        pageRangeDisplayed={this.state.pageRangeDisplayed}
+                        onPageChange={this.handlePageClick}
+                        containerClassName={"pagination"}
+                        subContainerClassName={"pages pagination"}
+                        activeClassName={"active"} /> 
+                </div>
             </div>
         )
     }
