@@ -21,7 +21,7 @@ export default function Navbar(){
           <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
             <a href="/" class="navbar-brand d-flex mr-auto"><big><big>Triton</big></big> 
             <span></span>
-            </a> <img src={img} width="4%" id="logoBrand" style={{marginLeft:"4px"}}/>
+            </a> <img src={img} width="30px" id="logoBrand" style={{marginLeft:"4px"}}/>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
               <span class="navbar-toggler-icon"></span>
             </button>
