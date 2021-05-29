@@ -54,7 +54,7 @@ export default function Navbar(){
                 <li class="nav-item">
                   {/* <a class="nav-link" href="#">Articles</a>
                    */}
-                  <Link class="nav-link" to="/articles">Articles</Link>
+                  <Link class="nav-link" to="/articles">News</Link>
                 </li>
               </ul>
               <ul class="nav navbar-nav ml-auto justify-content-end">

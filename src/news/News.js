@@ -47,11 +47,13 @@ class News extends React.Component {
         super(props);
         this.state = {
             result: <Loader />, data: [],
-            randomSearchParams: ["moon mars nasa space", "mars red planet", "isro jaxa esa", "Astronomy", "cosmos, galaxy hubble", "mars spaceX iss", "nightsky space research", "spacex", "astronauts capsule"
-                , "comet	binary star", "planet deep space"],
-            randomSearchParamsIndex: 0, isSeeMore: false,
+            randomSearchParams: ["moon mars nasa space", "mars red planet", "isro jaxa esa", "Astronomy", "cosmos galaxy hubble", "mars spaceX iss", "nightsky space research", "spacex", "astronauts capsule"
+                , "comet binary star", "planet deep space"],
+            randomSearchParamsIndex: 0, isSeeMore: false, isSearched:false,
         }
         this.seeMore = this.seeMore.bind(this);
+        this.search=this.search.bind(this);
+        this.onChange=this.onChange.bind(this);
     }
     fetchResults(keywords) {
         console.log(keywords);
@@ -65,7 +67,7 @@ class News extends React.Component {
         })
             .then(response => response.json())
             .then(data => {
-                console.log('Success:', data);
+                //console.log('Success:', data);
                 data = (this.sortArrayByDate(data.value));
                 const filteredData = [];
                 const uniqueArticles = [];
@@ -73,7 +75,7 @@ class News extends React.Component {
                 data.forEach(element => {
 
                     if (element.category !== "ScienceAndTechnology") {
-                        console.log(element);
+                        //console.log(element);
                     }
                     else if (uniqueArticles.includes(element.name) || uniqueArticles.includes(element.description)) {
                         console.log("not unique");
@@ -85,11 +87,11 @@ class News extends React.Component {
                 });
                 const dataToBeRendered = [];
 
-                console.log(filteredData, uniqueArticles);
+                //console.log(filteredData, uniqueArticles);
                 for (var i = 0; i < filteredData.length;) {
                     var row = filteredData.slice(i, i + 3);
                     i = i + 3;
-                    console.log(i, row);
+                    //console.log(i, row);
 
                     //var rowData1 = row[0] !== undefined ? this.createNewsCard(row[0]) : "";
                     //var rowData1 = this.createNewsCard(row[0]);
@@ -102,12 +104,26 @@ class News extends React.Component {
 
                     //console.log(i,row);
                 }
-                console.log("Asd")
+                //console.log("Asd")
                 console.log(filteredData);
                 data = filteredData;
 
-                if(this.state.isSeeMore){this.setState({isSeeMore:false})
-                    ReactDOM.render(dataToBeRendered,document.getElementById(keywords));}
+                if(this.state.isSearched){
+                    if(dataToBeRendered.length==0)
+                        this.setState({ result: <i>No results found...</i> });
+                    else
+                        this.setState({ result: dataToBeRendered, data: filteredData });
+                }
+                else if(this.state.isSeeMore){
+                    this.setState({isSeeMore:false});
+                    if(dataToBeRendered.length==0){
+                        //ReactDOM.render(dataToBeRendered,document.getElementById(keywords));
+                        //this.seeMore();
+                        
+                        //return;
+                    }
+                    ReactDOM.render(dataToBeRendered,document.getElementById(keywords));
+                }
                 else
                     this.setState({ result: dataToBeRendered, data: filteredData });
 
@@ -121,14 +137,15 @@ class News extends React.Component {
         this.fetchResults(encodeURI(currentKeywords));
     }
     seeMore() {
-        if(this.state.randomSearchParamsIndex>=this.state.randomSearchParams.length){
+        if(this.state.randomSearchParamsIndex>=this.state.randomSearchParams.length-1){
             ReactDOM.render(<i>No more results. Try searching</i>,document.getElementById("buttonForSeeMore"));
             return;
         }
-        
+        const currentIndex=this.state.randomSearchParamsIndex;
+        this.setState({ randomSearchParamsIndex: currentIndex + 1, isSeeMore: true });
         console.log(this.state.randomSearchParamsIndex)
-        this.setState({ randomSearchParamsIndex: this.state.randomSearchParamsIndex + 1, isSeeMore: true });
-        const keywords = this.state.randomSearchParams[this.state.randomSearchParamsIndex];
+        
+        const keywords = this.state.randomSearchParams[this.state.randomSearchParamsIndex+1];
 
         var seeMoreDiv = document.createElement("div");
         seeMoreDiv.id = encodeURI(keywords);
@@ -138,18 +155,37 @@ class News extends React.Component {
         this.fetchResults(encodeURI(keywords));
 
     }
+    search(){
+        var keywords=document.getElementById("searchBox").value;
+        keywords=keywords.trim();
+        if(keywords.length===0){
+            if(this.state.isSearched){
+                window.location.reload();
+            }
+            return;
+        }
+           
+        this.setState({isSearched:true,result:<Loader/>});
+        this.fetchResults(encodeURI(keywords));
+        ReactDOM.render(<a></a>,document.getElementById("seeMoreResults"));
+        ReactDOM.render(<a></a>,document.getElementById("buttonForSeeMore"));
+        
+    }
+    onChange(){
+    
+    }
     render() {
         return (
             <div id="divREs" className="container">
                 <br />
-                <h5>Latest Articles</h5>
+                <h5>Latest News</h5>
                 <br />
 
 
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="ISS.." style={{borderRadius:"40px",borderColor: "#007bff"}} aria-label="searchBox" aria-describedby="basic-addon2"/>
+                    <input type="text" class="form-control" id="searchBox" placeholder="ISS.." style={{borderRadius:"40px",borderColor: "#007bff"}} aria-label="searchBox" aria-describedby="basic-addon2"/>
                     <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="button" style={{borderRadius:"40px"}}>Search</button>
+                        <button class="btn btn-outline-primary" type="button" style={{borderRadius:"40px"}} onClick={this.search}>Search</button>
                     </div>
                 </div>
 
