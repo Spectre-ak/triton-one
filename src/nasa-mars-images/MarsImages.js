@@ -147,9 +147,53 @@ class NasaMarsApi extends React.Component{
 			<div className="container" id="idd" style={{color:"white"}}  onScroll={this.onScroll}> 
 				<h4>Select a rover and date</h4> 
 				<p>Credits: NASA's Mars Rover Photos<a href="https://api.nasa.gov/"> <i className="fa fa-arrow-right" aria-hidden="true"></i></a></p>
-				<a>Date: </a>
-				<input type="date" id="date" name="date" style={{color:"white",backgroundColor:"rgb(60 60 65)",borderRadius:"6px" }} />
-				<br/><br/>
+				<div id="carouselExampleIndicators" class="carousel slide" data-interval="200000" data-ride="carousel">
+					<ol class="carousel-indicators">
+						<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+
+					</ol>
+					<div class="carousel-inner text-center">
+						<div class="carousel-item active text-center">
+						<iframe src="https://www.youtube.com/embed/vneh09ro4bg" frameborder="0" allow="fullscreen;"  ></iframe>
+						</div>
+						<div class="carousel-item">
+						<iframe src="https://www.youtube.com/embed/5ufFkuY3U9g" frameborder="0" allow="fullscreen;" ></iframe>
+						</div>
+						<div class="carousel-item">
+						<iframe  src="https://www.youtube.com/embed/GEOv7Yg1cK0" frameborder="0" allow="fullscreen;" ></iframe>
+						</div>
+						<div class="carousel-item">
+						<iframe  src="https://www.youtube.com/embed/vXyEJJqu3X4" frameborder="0" allow="fullscreen;" ></iframe>
+						</div>
+						<div class="carousel-item">
+						<iframe  src="https://www.youtube.com/embed/C1wDXd2BIvI" frameborder="0" allow="fullscreen;" ></iframe>
+						</div>
+						<div class="carousel-item">
+						<iframe  src="https://www.youtube.com/embed/as2YvTXEnwA" frameborder="0" allow="fullscreen;" ></iframe>
+						</div>
+					</div>
+					<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+					<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+				<br/>
+				<div class="form-group row text-center">
+					<label for="date" class="col-2 col-md-1 col-form-label">Date:</label>
+					<div class="col-10 col-md-4 col-lg-3 ">
+						<input class="form-control " type="date" id="date" style={{color:"white",backgroundColor:"rgb(60 60 65)",borderRadius:"6px" }} />
+					</div>
+				</div>
+
 				<ul className="nav nav-pills justify-content-center" >
 				  <li className="nav-item" style={{paddingLeft:"5px"}}>
 				    <a className="nav-link active" id="1" data-toggle="tab" href="#"  onClick={this.curo}>Curiosity (18 Aug 2012 - present)</a>
