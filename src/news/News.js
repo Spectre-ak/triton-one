@@ -4,10 +4,10 @@ import ReactDOM from "react-dom"
 import Loader from "../Loader";
 
 function getNewsCard(element) {//console.log(element); 
-    if(element===undefined)return;
+    if (element === undefined) return;
     let imgSrc;
-    try{
-        if (element.image===undefined) {
+    try {
+        if (element.image === undefined) {
             console.log("cjjkjk")
             if (element.provider !== undefined) {
                 imgSrc = element.provider[0].image.thumbnail.contentUrl;
@@ -16,10 +16,10 @@ function getNewsCard(element) {//console.log(element);
         }
         else imgSrc = element.image.thumbnail.contentUrl;
     }
-    catch(err){
+    catch (err) {
 
     }
-    
+
 
     imgSrc = imgSrc === undefined ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzZ1ZlaUsgfXMJMm7XMlqnoRn14OVTD6aXA&usqp=CAU" : imgSrc;
 
@@ -32,7 +32,7 @@ function getNewsCard(element) {//console.log(element);
 
 
 function Row(props) {
-    
+
     return (
         <div className="row">
             <div className="col-md">{getNewsCard(props.res1)}</div>
@@ -46,14 +46,16 @@ class News extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            result: <Loader />, data: [], 
-            randomSearchParams:["moon mars nasa space","isro jaxa esa","Astronomy","cosmos, galaxy hubble","mars spaceX iss","nightsky space research"],
-            randomSearchParamsIndex:0,
+            result: <Loader />, data: [],
+            randomSearchParams: ["moon mars nasa space", "mars red planet", "isro jaxa esa", "Astronomy", "cosmos, galaxy hubble", "mars spaceX iss", "nightsky space research", "spacex", "astronauts capsule"
+                , "comet	binary star", "planet deep space"],
+            randomSearchParamsIndex: 0, isSeeMore: false,
         }
-        this.seeMore=this.seeMore.bind(this);
+        this.seeMore = this.seeMore.bind(this);
     }
-    fetchResults() {
-        var postData = { url: 'https://api.bing.microsoft.com/v7.0/news/search?category=ScienceAndTechnology&q=moon+mars+nasa+space&count=100&freshness=Week' };
+    fetchResults(keywords) {
+        console.log(keywords);
+        var postData = { url: 'https://api.bing.microsoft.com/v7.0/news/search?category=ScienceAndTechnology&q="=' + keywords + '&count=100&freshness=Week' };
         fetch('http://localhost:8080/newsPost', {
             method: 'POST', // or 'PUT'
             headers: {
@@ -66,24 +68,24 @@ class News extends React.Component {
                 console.log('Success:', data);
                 data = (this.sortArrayByDate(data.value));
                 const filteredData = [];
-                const uniqueArticles=[];
-                
+                const uniqueArticles = [];
+
                 data.forEach(element => {
 
                     if (element.category !== "ScienceAndTechnology") {
                         console.log(element);
                     }
-                    else if(uniqueArticles.includes(element.name) || uniqueArticles.includes(element.description)){
+                    else if (uniqueArticles.includes(element.name) || uniqueArticles.includes(element.description)) {
                         console.log("not unique");
                     }
-                    else{
-                        filteredData.push(element);uniqueArticles.push(element.description);uniqueArticles.push(element.name);
+                    else {
+                        filteredData.push(element); uniqueArticles.push(element.description); uniqueArticles.push(element.name);
                     }
-                        
+
                 });
                 const dataToBeRendered = [];
 
-                console.log(filteredData,uniqueArticles);
+                console.log(filteredData, uniqueArticles);
                 for (var i = 0; i < filteredData.length;) {
                     var row = filteredData.slice(i, i + 3);
                     i = i + 3;
@@ -103,7 +105,11 @@ class News extends React.Component {
                 console.log("Asd")
                 console.log(filteredData);
                 data = filteredData;
-                this.setState({ result: dataToBeRendered, data: filteredData });
+
+                if(this.state.isSeeMore){this.setState({isSeeMore:false})
+                    ReactDOM.render(dataToBeRendered,document.getElementById(keywords));}
+                else
+                    this.setState({ result: dataToBeRendered, data: filteredData });
 
             })
             .catch((error) => {
@@ -111,9 +117,25 @@ class News extends React.Component {
             });
     }
     componentDidMount() {
-        this.fetchResults();
+        const currentKeywords = this.state.randomSearchParams[this.state.randomSearchParamsIndex];
+        this.fetchResults(encodeURI(currentKeywords));
     }
-    seeMore(){
+    seeMore() {
+        if(this.state.randomSearchParamsIndex>=this.state.randomSearchParams.length){
+            ReactDOM.render(<i>No more results. Try searching</i>,document.getElementById("buttonForSeeMore"));
+            return;
+        }
+        
+        console.log(this.state.randomSearchParamsIndex)
+        this.setState({ randomSearchParamsIndex: this.state.randomSearchParamsIndex + 1, isSeeMore: true });
+        const keywords = this.state.randomSearchParams[this.state.randomSearchParamsIndex];
+
+        var seeMoreDiv = document.createElement("div");
+        seeMoreDiv.id = encodeURI(keywords);
+        document.getElementById("seeMoreResults").appendChild(seeMoreDiv);
+        ReactDOM.render(<Loader/>,document.getElementById(encodeURI(keywords)));
+        console.log(keywords);
+        this.fetchResults(encodeURI(keywords));
 
     }
     render() {
@@ -122,11 +144,25 @@ class News extends React.Component {
                 <br />
                 <h5>Latest Articles</h5>
                 <br />
-                {this.state.result}
+
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="ISS.." style={{borderRadius:"40px",borderColor: "#007bff"}} aria-label="searchBox" aria-describedby="basic-addon2"/>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="button" style={{borderRadius:"40px"}}>Search</button>
+                    </div>
+                </div>
+
                 <br/>
 
-                <p style={{textAlign:"center"}}>
-                    <button type="button" class="btn btn-outline-primary">See More</button>
+                {this.state.result}
+                <br />
+                <div id="seeMoreResults">
+
+                </div>
+                <br />
+                <p style={{ textAlign: "center" }} id="buttonForSeeMore">
+                    <button type="button" class="btn btn-outline-primary" onClick={this.seeMore} style={{borderRadius:"40px"}}>See More</button>
                 </p>
 
                 <div class="container">

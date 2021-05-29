@@ -239,3 +239,7 @@ iframe{
 .githubLogo{
   color: rebeccapurple;
 }
+
+.border-secondary {
+  border-color: #0087ff!important;
+}
