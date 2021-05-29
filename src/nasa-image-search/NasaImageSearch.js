@@ -93,7 +93,7 @@ class NasaApi extends React.Component{
 				<br/>
 				<ImageVidOps getOption={this.getOption}/>
 				<p align="center">
-					<button className="btn btn-primary" onClick={this.onChangeInput}>Search...</button>
+					<button className="btn btn-outline-primary" onClick={this.onChangeInput}>Search...</button>
 				</p>
 				<br/>
                 <div id="divForResults">

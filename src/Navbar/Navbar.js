@@ -45,7 +45,7 @@ export default function Navbar(){
                 </li>
                 
                 <li class="nav-item">
-                  <a class="nav-link" href="/iss-location">ISS Location</a>
+                  <a class="nav-link" href="https://triton-one.azurewebsites.net/iss-location">ISS Location</a>
                 
                   {/* <Link class="nav-link" to="/users">users</Link>
                  */}
@@ -59,7 +59,7 @@ export default function Navbar(){
               </ul>
               <ul class="nav navbar-nav ml-auto justify-content-end">
                 <li class="nav-item">
-                   <big><big><big><i class="fab fa-github" aria-hidden="true" id="githubLogo" onClick={()=>{window.location.href="https://github.com/Spectre-ak/triton-one"}}></i></big></big></big>
+                   <big><big><big><a href="#" className="githubLogo"> <i class="fab fa-github" aria-hidden="true" id="githubLogo" onClick={()=>{window.location.href="https://github.com/Spectre-ak/triton-one"}}></i></a> </big></big></big>
                 </li>
     
               </ul>

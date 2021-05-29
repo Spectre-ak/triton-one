@@ -229,3 +229,13 @@ iframe{
     margin-bottom: 7%;
   }
 }
+
+
+.articleUrl-a {
+  /* text-decoration: none; */
+  color: white;
+}
+
+.githubLogo{
+  color: rebeccapurple;
+}

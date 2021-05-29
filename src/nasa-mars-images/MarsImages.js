@@ -211,7 +211,7 @@ class NasaMarsApi extends React.Component{
 				  
 				  <br/>
 				<p align="center">
-					<button className="btn btn-primary" id="btnClick" onClick={this.onChangeInput} >Load...</button>
+					<button className="btn btn-outline-primary" id="btnClick" onClick={this.onChangeInput} >Load...</button>
 				</p>
 				<br/>
 				<div id="divForResults" onScroll={this.scroll} ></div>

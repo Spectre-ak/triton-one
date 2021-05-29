@@ -80,7 +80,7 @@ class HubbleTelescope extends React.Component {
                 <input className="form-control border-secondary py-2" id="searchIDDescription" type="search" placeholder="M87.." style={{color:"white", borderRadius:"40px",backgroundColor:"#131316"}}></input>	
 				<br/>
                 <p align="center">
-					<button className="btn btn-primary" id="instantTrigger" onClick={this.loadResults}>Search...</button>
+					<button className="btn btn-outline-primary" id="instantTrigger" onClick={this.loadResults}>Search...</button>
 				</p>
                 <br/>
                 
