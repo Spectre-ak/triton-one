@@ -250,5 +250,5 @@ class News extends React.Component {
 }
 
 
-
+export {getNewsCard};
 export default News;
