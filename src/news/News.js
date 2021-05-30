@@ -55,10 +55,11 @@ class News extends React.Component {
         this.search=this.search.bind(this);
         this.onChange=this.onChange.bind(this);
     }
-    fetchResults(keywords) {
+    fetchResults(keywords) {   
         console.log(keywords);
         var postData = { url: 'https://api.bing.microsoft.com/v7.0/news/search?category=ScienceAndTechnology&q="=' + keywords + '&count=100&freshness=Week' };
-        fetch('http://localhost:8080/newsPost', {
+        fetch('https://triton-one-backend.azurewebsites.net/newsPost', {
+        //fetch('http://localhost:8080/newsPost', {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
@@ -178,12 +179,12 @@ class News extends React.Component {
         return (
             <div id="divREs" className="container">
                 <br />
-                <h5>Latest News</h5>
+                <h4>Latest News</h4>
                 <br />
 
 
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="searchBox" placeholder="ISS.." style={{borderRadius:"40px",borderColor: "#007bff"}} aria-label="searchBox" aria-describedby="basic-addon2"/>
+                    <input type="search" class="form-control" id="searchBox" placeholder="ISS.." style={{borderRadius:"40px",borderColor: "#007bff"}} aria-label="searchBox" aria-describedby="basic-addon2"/>
                     <div class="input-group-append">
                         <button class="btn btn-outline-primary" type="button" style={{borderRadius:"40px"}} onClick={this.search}>Search</button>
                     </div>

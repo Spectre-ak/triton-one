@@ -89,13 +89,28 @@ class NasaApi extends React.Component{
 				<br/>
 				{/* <input className="form-control border-secondary py-2" id="searchIDTopic" type="search" placeholder="Topic.." style={{color:"white", borderRadius:"40px",backgroundColor:"#131316"}}></input>	
 				<br/> */}
-				<input className="form-control border-secondary py-2" id="searchIDDescription" type="search" placeholder="Mars.." style={{color:"white", borderRadius:"40px",backgroundColor:"#131316"}}></input>	
-				<br/>
+				{/* <input className="form-control border-secondary py-2" id="searchIDDescription" type="search" placeholder="Mars.." style={{color:"white", borderRadius:"40px",backgroundColor:"#131316"}}></input>	
+				<br/> */}
 				<ImageVidOps getOption={this.getOption}/>
-				<p align="center">
+				{/* <p align="center">
 					<button className="btn btn-outline-primary" onClick={this.onChangeInput}>Search...</button>
 				</p>
-				<br/>
+				<br/> */}
+
+				<br />
+
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="searchIDDescription" type="search" placeholder="Mars.." style={{borderRadius:"40px",borderColor: "#007bff"}} aria-label="searchBox" aria-describedby="basic-addon2"/>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="button" style={{borderRadius:"40px"}} 
+                            onClick={this.onChangeInput}>Search</button>
+
+                    </div>
+                </div>
+
+                <br/>
+
                 <div id="divForResults">
                     
                 </div>

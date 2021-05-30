@@ -74,16 +74,33 @@ class HubbleTelescope extends React.Component {
             <div className="container">
                 {/* <h1>loaded {this.state.show}</h1>
                 <button onClick={this.handleClick}>clisk</button> */}
-                <h5>Hubble Space Telescope Images and Videos</h5>
+                <h4>Hubble Space Telescope Captured Images and Videos</h4>
+                <p>Credits: NASA's HUBBLESITE API<a href="https://hubblesite.org/"> <i className="fa fa-arrow-right"  aria-hidden="true"></i></a></p>
+				
                 <br/>
                 <ImageVidOps getOption={this.getOption}/><br/>
-                <input className="form-control border-secondary py-2" id="searchIDDescription" type="search" placeholder="M87.." style={{color:"white", borderRadius:"40px",backgroundColor:"#131316"}}></input>	
+                {/* <input className="form-control border-secondary py-2" id="searchIDDescription" type="search" placeholder="M87.." style={{color:"white", borderRadius:"40px",backgroundColor:"#131316"}}></input>	
 				<br/>
                 <p align="center">
 					<button className="btn btn-outline-primary" id="instantTrigger" onClick={this.loadResults}>Search...</button>
 				</p>
-                <br/>
+                <br/> */}
                 
+                
+
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="searchIDDescription" type="search" placeholder="M87.." style={{borderRadius:"40px",borderColor: "#007bff"}} aria-label="searchBox" aria-describedby="basic-addon2"/>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="button" style={{borderRadius:"40px"}} 
+                            id="instantTrigger" onClick={this.loadResults}>Search</button>
+
+                    </div>
+                </div>
+
+                <br/>
+
+
                 <div id="divForResults">
                     
                 </div>
