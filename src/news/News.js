@@ -134,6 +134,14 @@ class News extends React.Component {
             });
     }
     componentDidMount() {
+        try{
+            if(document.getElementById("collapsingNavbar3").className==="navbar-collapse w-100 collapse show")
+			    document.getElementById("buttonForNavbarCollapse").click();
+		}
+		catch(err){
+
+		}
+
         const currentKeywords = this.state.randomSearchParams[this.state.randomSearchParamsIndex];
         this.fetchResults(encodeURI(currentKeywords));
     }

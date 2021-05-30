@@ -144,6 +144,12 @@ class NasaMarsApi extends React.Component{
 		
 				
 	}
+	componentDidMount(){
+		try{
+            if(document.getElementById("collapsingNavbar3").className==="navbar-collapse w-100 collapse show")
+			    document.getElementById("buttonForNavbarCollapse").click();
+        }catch(er){}
+	}
 	render(){
 		return(
 			<div className="container" id="idd" style={{color:"white"}}  onScroll={this.onScroll}> 

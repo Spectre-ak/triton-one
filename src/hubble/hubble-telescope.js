@@ -40,6 +40,11 @@ class HubbleTelescope extends React.Component {
     
     componentDidMount(){
         try{
+            if(document.getElementById("collapsingNavbar3").className==="navbar-collapse w-100 collapse show")
+			    document.getElementById("buttonForNavbarCollapse").click();
+        }catch(er){}
+
+        try{
             var url=(window.location.href);
             url=url.split("/hubble-gallery/")[1];
             console.log(url);

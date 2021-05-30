@@ -11,6 +11,7 @@ import NasaMarsApi from "../nasa-mars-images/MarsImages";
 import News from "../news/News";
 import Home from "../home/Home";
 import img from "./logoRo.png";
+import triton_black from "./triton_black.png";
 
 export default function Navbar(){
     return (
@@ -21,8 +22,8 @@ export default function Navbar(){
           <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
             <a href="/" class="navbar-brand d-flex mr-auto"><h2>Triton</h2>
             <span></span>
-            </a> <img src={img} width="30px" id="logoBrand" style={{marginLeft:"4px"}}/>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+            </a> <img src={triton_black} width="35x" id="logoBrand" style={{marginLeft:"5px",marginRight:"5px"}}/>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3" id="buttonForNavbarCollapse">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse w-100 collapse" id="collapsingNavbar3">
@@ -30,7 +31,7 @@ export default function Navbar(){
                 <li class="nav-item">
                   {/* <a class="nav-link" href="#"></a>
                    */}
-                  <Link class="nav-link" to="/library">Media Library</Link>
+                  <Link class="nav-link" data-toggle="collapse" to="/library">Media Library</Link>
                 </li>
                 <li class="nav-item">
                   {/* <a class="nav-link" href="#">Mars Images</a>

@@ -120,6 +120,14 @@ class NasaApi extends React.Component{
 	}
 	componentDidMount(){
 		try{
+			if(document.getElementById("collapsingNavbar3").className==="navbar-collapse w-100 collapse show")
+			    document.getElementById("buttonForNavbarCollapse").click();
+		}
+		catch(err){
+
+		}
+
+		try{
             var url=(window.location.href);
             url=url.split("/library/")[1];
             console.log(url);

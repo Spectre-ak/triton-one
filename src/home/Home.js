@@ -41,6 +41,11 @@ export default class Home extends React.Component {
     }
     componentDidMount() {
         //this.fetchAPODRandom();
+        try{
+            if(document.getElementById("collapsingNavbar3").className==="navbar-collapse w-100 collapse show")
+			    document.getElementById("buttonForNavbarCollapse").click();
+        }catch(er){}
+        
         this.receivedData();
         console.log(window.innerWidth, window.innerHeight);
         const innerWidth=window.innerWidth;
