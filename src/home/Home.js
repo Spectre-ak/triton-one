@@ -4,6 +4,9 @@ import Loader from '../Loader';
 import ReactDOM from "react-dom";
 import LoaderButtom from "../LoaderButton";
 import MarsNews from "./MarsNews";
+
+import SpaceX from "./SpaceXAPI";
+
 function ImageWithLabel(props) {
     return (
         <div style={{ textAlign: "center" }}>
@@ -137,11 +140,11 @@ export default class Home extends React.Component {
 
                 <div class="row text-center">
                     <div class="col-12 col-lg-2">
-                        <h4>Upcoming SpaceX launches</h4>
-
+                        <h4 style={{textAlign:"left"}}>Upcoming SpaceX launches</h4>
+                        <SpaceX/>
                     </div>
 
-                    <div class="col-12 col-lg-8">
+                    <div class="col-12 col-lg-7">
                     <div className="container">
                             <p>Astronomy Picture of the Day <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i></a></p>
                             <hr />
@@ -173,7 +176,7 @@ export default class Home extends React.Component {
                     </div>
 
 
-                    <div class="col-12 col-lg-2">
+                    <div class="col-12 col-lg-3">
                         <h4>Trending News</h4>
                         <MarsNews/>
                     </div>
