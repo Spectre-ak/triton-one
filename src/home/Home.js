@@ -136,12 +136,12 @@ export default class Home extends React.Component {
             <div className="container-fluid">
 
                 <div class="row text-center">
-                    <div id="try" class="col-12 col-lg-3">
+                    <div class="col-12 col-lg-2">
                         <h4>Upcoming SpaceX launches</h4>
 
                     </div>
 
-                    <div id="try2" class="col-12 col-lg-6">
+                    <div class="col-12 col-lg-8">
                     <div className="container">
                             <p>Astronomy Picture of the Day <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i></a></p>
                             <hr />
@@ -173,7 +173,7 @@ export default class Home extends React.Component {
                     </div>
 
 
-                    <div id="try3" class="col-12 col-lg-3">
+                    <div class="col-12 col-lg-2">
                         <h4>Trending News</h4>
                         <MarsNews/>
                     </div>
