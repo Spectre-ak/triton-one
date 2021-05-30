@@ -9,7 +9,8 @@ function ImageWithLabel(props){
             <br/>
             <h4>{props.title}</h4>
             <div id={props.unid+"imgLoader"}><Loader/></div>
-            <img className="img-fluid" src={props.url} onLoad={()=>{document.getElementById(props.unid+"imgLoader").remove()}}/>
+            <img className="img-fluid" src={props.url} onLoad={()=>{
+                try{document.getElementById(props.unid+"imgLoader").remove()}catch(err){}}}/>
             <br/><br/>
             <h6><a  data-toggle="collapse" href={"#"+props.unid} role="button" aria-expanded="false" aria-controls={props.unid}>{props.title+"...read more"}</a></h6>
             <div class="collapse multi-collapse" id={props.unid}>
@@ -127,7 +128,7 @@ export default class Home extends React.Component {
             <div className="container">
                 <p>Astronomy Picture of the Day <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i></a></p>
                 <hr/>
-                <h4>Random NASA's APOD API Images</h4>
+                <h4>NASA's APOD Images</h4>
                 {this.state.postData}
                 <br/>
                 <div className="container" style={{overflowX:"auto",overflowY:"hidden"}} >

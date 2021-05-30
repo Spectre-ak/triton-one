@@ -19,7 +19,7 @@ export default function Navbar(){
         
       <div className="container-fluid">
           <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
-            <a href="/" class="navbar-brand d-flex mr-auto"><big><big>Triton</big></big> 
+            <a href="/" class="navbar-brand d-flex mr-auto"><h2>Triton</h2>
             <span></span>
             </a> <img src={img} width="30px" id="logoBrand" style={{marginLeft:"4px"}}/>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
