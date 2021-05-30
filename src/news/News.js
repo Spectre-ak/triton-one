@@ -210,20 +210,7 @@ class News extends React.Component {
                     <button type="button" class="btn btn-outline-primary" onClick={this.seeMore} style={{borderRadius:"40px"}}>See More</button>
                 </p>
 
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm">
-                            One of three columns
-                    </div>
-                        <div class="col-sm">
-                            One of three columns
-                    </div>
-                        <div class="col-sm">
-                            One of three columns
-                    </div>
-
-                    </div>
-                </div>
+             
 
 
             </div>

@@ -22,7 +22,7 @@ export default function Navbar(){
           <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
             <a href="/" class="navbar-brand d-flex mr-auto"><h2>Triton</h2>
             <span></span>
-            </a> <img src={triton_black} width="35x" id="logoBrand" style={{marginLeft:"5px",marginRight:"5px"}}/>
+            </a> <img src={triton_black} width="34x" id="logoBrand" style={{marginLeft:"5px",marginRight:"5px"}}/>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3" id="buttonForNavbarCollapse">
               <span class="navbar-toggler-icon"></span>
             </button>
