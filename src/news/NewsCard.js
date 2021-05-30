@@ -4,7 +4,7 @@ function NewsCard(props){
     return(
         <div className="card container-fluid" id="news_card" style={{borderColor:"white"},{borderStyle:"block"}}>
             <br/>
-            <h4 ><a href={props.articleUrl} className="articleUrl-a">{props.title}</a></h4>
+            <h4 ><a target="_blank" href={props.articleUrl} className="articleUrl-a">{props.title}</a></h4>
             
             
 
