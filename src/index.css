@@ -26,6 +26,7 @@ code {
   }
 
 
+
 .loader {
 	margin: 0 auto;
 	border-top: 3px solid #3498db;
@@ -121,7 +122,7 @@ code {
 #news_card{
   background-color: black;
   color: white;
-  border: solid white 1px;
+ 
 
   border-radius: 5px;
   margin-top: 5px;
@@ -150,7 +151,7 @@ h1{color: whitesmoke;}
 #news_card:hover{
   -webkit-transition: .2s ease-in-out;
   transition: .3s ease-in-out;
-  border: solid rgb(124, 245, 245) 1px;
+ 
   background-color: #000535;
 }
 
@@ -190,7 +191,7 @@ h1{color: whitesmoke;}
 
     @media (prefers-reduced-motion: no-preference) {
       #logoBrand {
-        animation: App-logo-spin infinite 1.5s cubic-bezier(0, 0, 1, -0.42);;
+        animation: App-logo-spin infinite 1.5s cubic-bezier(0.42, 0, 0, 1.04);
          
       }
     }
@@ -245,10 +246,12 @@ iframe{
 }
 
 .navbar-toggler {
-  background-color: #3f3a3a;
-
+  color: #007bff;
+    border-color: #007bff;
+  background-color: #007bff;
 }
 
 #spaceXContainer{
   text-align: left;
 }
+

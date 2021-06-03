@@ -95,7 +95,8 @@ class HubbleTelescope extends React.Component {
 
 
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="searchIDDescription" type="search" placeholder="M87.." style={{borderRadius:"40px",borderColor: "#007bff"}} aria-label="searchBox" aria-describedby="basic-addon2"/>
+                    <input type="text" class="form-control" id="searchIDDescription" type="search" placeholder="M87.." style={{borderRadius:"40px",borderColor: "#007bff",
+                backgroundColor: "transparent",color: "white"}} aria-label="searchBox" aria-describedby="basic-addon2"/>
                     <div class="input-group-append">
                         <button class="btn btn-outline-primary" type="button" style={{borderRadius:"40px"}} 
                             id="instantTrigger" onClick={this.loadResults}>Search</button>

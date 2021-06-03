@@ -31,22 +31,22 @@ export default function Navbar(){
                 <li class="nav-item">
                   {/* <a class="nav-link" href="#"></a>
                    */}
-                  <Link class="nav-link" data-toggle="collapse" to="/library">Media Library</Link>
+                  <Link class="nav-link" data-toggle="collapse" to="/library"><h5>Media Library</h5></Link>
                 </li>
                 <li class="nav-item">
                   {/* <a class="nav-link" href="#">Mars Images</a>
                    */}
-                  <Link class="nav-link" to="/mars-images">Mars Images</Link>
+                  <Link class="nav-link" to="/mars-images"><h5>Mars Images</h5></Link>
                 </li>
                 
                 <li class="nav-item">
                   {/* <a class="nav-link" href="#">Hubble</a>
                    */}
-                  <Link class="nav-link" to="/hubble-gallery">Hubble Telescope</Link>
+                  <Link class="nav-link" to="/hubble-gallery"><h5>Hubble Telescope</h5></Link>
                 </li>
                 
                 <li class="nav-item">
-                  <a class="nav-link" href="https://triton-one.azurewebsites.net/iss-location">ISS Location</a>
+                  <a class="nav-link" href="https://triton-one.azurewebsites.net/iss-location"><h5>ISS Location</h5></a>
                 
                   {/* <Link class="nav-link" to="/users">users</Link>
                  */}
@@ -55,12 +55,12 @@ export default function Navbar(){
                 <li class="nav-item">
                   {/* <a class="nav-link" href="#">Articles</a>
                    */}
-                  <Link class="nav-link" to="/articles">News</Link>
+                  <Link class="nav-link" to="/articles"><h5>News</h5></Link>
                 </li>
               </ul>
               <ul class="nav navbar-nav ml-auto justify-content-end">
                 <li class="nav-item">
-                   <big><big><big><a href="#" className="githubLogo"> <i class="fab fa-github" aria-hidden="true" id="githubLogo" onClick={()=>{window.location.href="https://github.com/Spectre-ak/triton-one"}}></i></a> </big></big></big>
+                   <big><big><big><big><a href="#" className="githubLogo"> <i class="fab fa-github" aria-hidden="true" id="githubLogo" onClick={()=>{window.location.href="https://github.com/Spectre-ak/triton-one"}}></i></a></big> </big></big></big>
                 </li>
     
               </ul>
