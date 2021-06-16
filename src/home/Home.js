@@ -137,18 +137,18 @@ export default class Home extends React.Component {
         return (
 
             <div className="container-fluid">
-
+                <br/>
                 <div class="row text-center">
-                    <div class="col-12 col-lg-2">
+                    <div class="col-12 col-lg-3">
                         <h4 style={{textAlign:"left"}}>Upcoming SpaceX launches</h4>
                         <SpaceX/>
                     </div>
 
-                    <div class="col-12 col-lg-7">
+                    <div class="col-12 col-lg-6">
                     <div className="container">
-                            <p>Astronomy Picture of the Day <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i></a></p>
+                            <p style={{textAlign:"left"}}>Astronomy Picture of the Day <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i></a></p>
                             <hr />
-                            <h4>NASA's APOD Images</h4>
+                            <h4 style={{textAlign:"left"}}>NASA's APOD Images</h4>
                             {this.state.postData}
                             <br />
                             <div className="container" style={{ overflowX: "auto", overflowY: "hidden" }} >
