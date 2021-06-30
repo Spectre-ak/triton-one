@@ -1,6 +1,9 @@
 # triton-one
 ### Available at https://triton-one.azurewebsites.net/
-Application uses following APIs:
+
+This is an enhanced version of the main [Triton](https://GitHub.com/Spectre-ak/Triton)
+
+##### Application uses following APIs:
 
   1. [NASA's open APIs](https://api.nasa.gov/) 
   2. [Hubblesite API](http://hubblesite.org/api/documentation)
