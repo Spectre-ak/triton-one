@@ -131,9 +131,9 @@ class NasaApi extends React.Component{
 		try{
             var url=(window.location.href);
             url=url.split("/library/")[1];
-            console.log(url);
+            //console.log(url);
             const param=url.split("~search~");
-            console.log(param);
+            //console.log(param);
             if(param[0]==="image"){
                 document.getElementById("inlineRadio1").click();
             }
@@ -142,8 +142,8 @@ class NasaApi extends React.Component{
             }
             if(param[1]!=="")
                 document.getElementById("searchIDDescription").value=param[1];
-            console.log(param[1]==="")
-            console.log(this.state);
+            //console.log(param[1]==="")
+            //console.log(this.state);
         }
         catch(err){
             document.getElementById("inlineRadio1").click();
@@ -167,7 +167,7 @@ class NasaApi extends React.Component{
 	
 		//console.log(topic,desc);
 		const media_type=this.state.ops===1?"image":"video";
-		console.log(ded,media_type);
+		//console.log(ded,media_type);
 		ReactDOM.unmountComponentAtNode(document.getElementById("divForResults"));
         ReactDOM.render(<AppPage topic={""} desc={desc} keywords={ded} media_type={media_type}/>,document.getElementById("divForResults"));
 		
@@ -175,7 +175,7 @@ class NasaApi extends React.Component{
 	}
 	getOption=(e)=>{
         this.state.ops=e;
-        console.log(this.state)
+        //console.log(this.state)
     };
 }
 
