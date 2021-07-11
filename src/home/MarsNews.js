@@ -57,7 +57,7 @@ export default class MarsNews extends React.Component {
             .then(response => response.json())
             .then(data33 => {
                 var data = data33;
-                console.log('Success:', data);
+                //console.log('Success:', data);
                 data = (this.sortArrayByDate(data.value));
                // console.log(data)
                 var filteredData = [];
@@ -84,7 +84,7 @@ export default class MarsNews extends React.Component {
                 //console.log(filteredData);
                 var row = filteredData.slice(0, 3);
                 
-                console.log(row);
+                //console.log(row);
                 dataToBeRendered.push(<Row res1={row[0]} res2={row[1]} res3={row[2]} />);
 
                 //console.log("Asd")
