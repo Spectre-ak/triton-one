@@ -8,7 +8,7 @@ function getNewsCard(element) {//console.log(element);
     let imgSrc;
     try {
         if (element.image === undefined) {
-            console.log("cjjkjk")
+            //console.log("cjjkjk")
             if (element.provider !== undefined) {
                 imgSrc = element.provider[0].image.thumbnail.contentUrl;
             } else
@@ -56,7 +56,7 @@ class News extends React.Component {
         this.onChange=this.onChange.bind(this);
     }
     fetchResults(keywords) {   
-        console.log(keywords);
+        //console.log(keywords);
         var postData = { url: 'https://api.bing.microsoft.com/v7.0/news/search?category=ScienceAndTechnology&q="=' + keywords + '&count=100&freshness=Week' };
         fetch('https://triton-one-backend.azurewebsites.net/newsPost', {
         //fetch('http://localhost:8080/newsPost', {
@@ -106,7 +106,7 @@ class News extends React.Component {
                     //console.log(i,row);
                 }
                 //console.log("Asd")
-                console.log(filteredData);
+                //console.log(filteredData);
                 data = filteredData;
 
                 if(this.state.isSearched){
@@ -152,7 +152,7 @@ class News extends React.Component {
         }
         const currentIndex=this.state.randomSearchParamsIndex;
         this.setState({ randomSearchParamsIndex: currentIndex + 1, isSeeMore: true });
-        console.log(this.state.randomSearchParamsIndex)
+        //console.log(this.state.randomSearchParamsIndex)
         
         const keywords = this.state.randomSearchParams[this.state.randomSearchParamsIndex+1];
 
@@ -160,7 +160,7 @@ class News extends React.Component {
         seeMoreDiv.id = encodeURI(keywords);
         document.getElementById("seeMoreResults").appendChild(seeMoreDiv);
         ReactDOM.render(<Loader/>,document.getElementById(encodeURI(keywords)));
-        console.log(keywords);
+        //console.log(keywords);
         this.fetchResults(encodeURI(keywords));
 
     }
@@ -231,7 +231,7 @@ class News extends React.Component {
         let description = element.description;
         let title = element.name;
         let articleUrl = element.url;
-        console.log(title, articleUrl, description, imgSrc);
+        //console.log(title, articleUrl, description, imgSrc);
         return <NewsCard title={title} articleUrl={articleUrl} desc={description} src={imgSrc} />
     }
     sortArrayByDate(objs) {
