@@ -39,11 +39,10 @@ export default function Navbar(){
                   <Link class="nav-link" to="/mars-images"><h5>Mars Images</h5></Link>
                 </li>
                 
-                <li class="nav-item">
-                  {/* <a class="nav-link" href="#">Hubble</a>
-                   */}
+                {/* <li class="nav-item">
+  
                   <Link class="nav-link" to="/hubble-gallery"><h5>Hubble Telescope</h5></Link>
-                </li>
+                </li> */}
                 
                 <li class="nav-item">
                   <a class="nav-link" href="https://triton-one.azurewebsites.net/iss-location"><h5>ISS Location</h5></a>
