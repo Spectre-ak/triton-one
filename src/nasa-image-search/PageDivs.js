@@ -34,7 +34,7 @@ function getAll(url){
             if(res["collection"]["items"].length>0){
                 totalArr=totalArr.concat(res["collection"]["items"]);
             }
-            console.log(res);
+            //console.log(res);
             if(res["collection"]["links"].length==1)
                 getAll(res["collection"]["links"][0]["href"]);
             else if(res["collection"]["links"].length==2)
@@ -123,7 +123,7 @@ export default class AppPage extends Component {
             fetch(this.state.url)
             .then(response=>response.json())
             .then(res => {
-                console.log(res);
+                //console.log(res);
                 //case when no more pages are there
                 if(res["reason"]){
                     this.setState({isNextPage:false});
@@ -131,7 +131,7 @@ export default class AppPage extends Component {
                 }
                 this.setState({currentFetchedRes:this.state.currentFetchedRes.concat(res["collection"]["items"])});
                 this.setState({links:res["collection"].links, loadmoreStatusMessage:"Pages",loadmoreStatus:"" });
-                console.log(this.state);
+                //console.log(this.state);
                 if(this.props.media_type==="image"){
                     this.UpdatePostDataImage(true); 
                 }
@@ -151,9 +151,9 @@ export default class AppPage extends Component {
     handlePageClick = (e) => {
         const selectedPage = e.selected;
         const offset = selectedPage * this.state.perPage;
-        console.log(this.state.pageCount);
+        //console.log(this.state.pageCount);
         if(selectedPage+1===this.state.pageCount){
-            console.log("reached max size for current call");
+            //console.log("reached max size for current call");
             var urlNext="";
             try{
                 if(this.state.links.length===1)
@@ -164,8 +164,8 @@ export default class AppPage extends Component {
                     url:urlNext,
                     isNextPage:true,loadmoreStatus:<LoaderButtom/>,loadmoreStatusMessage:"Loading.."
                 });
-                console.log(urlNext)
-                console.log(this.state);
+                //console.log(urlNext)
+                //console.log(this.state);
             }
             catch(err){
                 console.log(err);
@@ -182,9 +182,9 @@ export default class AppPage extends Component {
     };
 
     componentDidMount() {
-        console.log(this.props)
+        //console.log(this.props)
         this.receivedData();
-        console.log(window.innerWidth, window.innerHeight);
+        //console.log(window.innerWidth, window.innerHeight);
         const innerWidth=window.innerWidth;
         let factor=1;
         if(innerWidth<=350){
