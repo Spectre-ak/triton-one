@@ -52,7 +52,7 @@ export default class Home extends React.Component {
         } catch (er) { }
 
         this.receivedData();
-        console.log(window.innerWidth, window.innerHeight);
+        //console.log(window.innerWidth, window.innerHeight);
         const innerWidth = window.innerWidth;
         let factor = 1;
         if (innerWidth <= 350) {
@@ -71,11 +71,11 @@ export default class Home extends React.Component {
     }
     UpdatePostData() {
         const slice = this.state.data.slice(this.state.offset, this.state.offset + this.state.perPage)
-        console.log(slice);
+        //console.log(slice);
         const postData = slice.map(pd =>
             <ImageWithLabel url={pd.url} title={pd.title} desc={pd.explanation} unid={pd.url.replace(/\W/g, '')} key={pd.title.replace(/[^a-z]/gi, '')} />
         )
-        console.log(this.state.data.length);
+        //console.log(this.state.data.length);
         this.setState({
             pageCount: Math.ceil(this.state.data.length / this.state.perPage),
             postData
@@ -84,7 +84,7 @@ export default class Home extends React.Component {
     fetchAPODRandomMore() {
         fetch("https://api.nasa.gov/planetary/apod?api_key=gtiZgqXuP8f3OPyjqu21ysauFO8mCOyDPjRKwhJq&count=100").then(response => response.json())
             .then(res => {
-                console.log(res);
+                //console.log(res);
                 const currentData = this.state.data;
                 res.forEach(element => {
                     if (element.media_type === "image") {
@@ -99,14 +99,14 @@ export default class Home extends React.Component {
         if (!this.state.isFetched) {
             fetch("https://api.nasa.gov/planetary/apod?api_key=gtiZgqXuP8f3OPyjqu21ysauFO8mCOyDPjRKwhJq&count=100").then(respone => respone.json())
                 .then(res => {
-                    console.log(res);
+                    //console.log(res);
                     const data = res; const filteredData = [];
                     res.forEach(element => {
                         if (element.media_type === "image") {
                             filteredData.push(element);
                         }
                     });
-                    console.log(filteredData)
+                    //console.log(filteredData)
                     this.setState({ data: filteredData, isFetched: true, loadmoreStatusMessage: "Pages", loadmoreStatus: "" });
                     this.UpdatePostData();
 
@@ -122,7 +122,8 @@ export default class Home extends React.Component {
         const selectedPage = e.selected;
         const offset = selectedPage * this.state.perPage;
         if (selectedPage === this.state.pageCount - 2 || selectedPage === this.state.pageCount - 1) {
-            console.log("load more"); this.fetchAPODRandomMore();
+            //console.log("load more"); 
+            this.fetchAPODRandomMore();
             this.setState({ loadmoreStatus: <LoaderButtom />, loadmoreStatusMessage: "Loading.." });
         }
         this.setState({
