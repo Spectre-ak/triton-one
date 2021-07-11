@@ -11,7 +11,7 @@ function callApiRocketLocation(id,containerID) {
     req.addEventListener("load", function () {
         if (req.status == 200 && req.readyState == 4) {
             var response = JSON.parse(req.responseText);
-            console.log(response);
+            //console.log(response);
             var rocket_name = response.locality;
 
             document.getElementById(containerID).innerHTML=rocket_name;
@@ -34,7 +34,7 @@ function callApiRocket(id,containerID) {
     req.addEventListener("load", function () {
         if (req.status == 200 && req.readyState == 4) {
             var response = JSON.parse(req.responseText);
-            console.log(response);
+            //console.log(response);
             var rocket_name = response.name;
 
             document.getElementById(containerID).innerHTML=rocket_name;
@@ -54,7 +54,7 @@ function callApi() {
     req.addEventListener("load", function () {
         if (req.status == 200 && req.readyState == 4) {
             var response = JSON.parse(req.responseText);
-            console.log(response)
+            //console.log(response)
             var rocket_name1 = response[0].rocket;
             var rocket_name2 = response[1].rocket;
             var rocket_name3 = response[2].rocket;
