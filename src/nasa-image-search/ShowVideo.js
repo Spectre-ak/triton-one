@@ -86,7 +86,7 @@ class ShowVideo extends React.Component{
                         
                     }
                 });
-                console.log(vids);
+                //console.log(vids);
                 this.setState({vids:vids});
                 const ops=<VideoQuality vids={vids} getOption={this.getOption} id={this.props.id}/>
                // ReactDOM.render(ops,document.getElementById("showOp"));
@@ -115,8 +115,8 @@ class ShowVideo extends React.Component{
     }
     getOption=(e)=>{
         this.state.ops=e;
-        console.log(e);
-        console.log(this.state.vids[e]);
+        //console.log(e);
+        //console.log(this.state.vids[e]);
         this.setState({videoUrl:this.state.vids[e]});
     };
 }
