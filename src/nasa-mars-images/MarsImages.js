@@ -49,6 +49,52 @@ var apiArray=["gtiZgqXuP8f3OPyjqu21ysauFO8mCOyDPjRKwhJq",
 "HQv9ho1mQR9um5vu34dEhP5lsedm95MEYOz3rfBh",
 "W9OdIjEe1fWDQYstoh8lHgf1GtHKBAdbkS1VzcQ5","5B6oJsSCQyekXZvNOKpsUhRPl1e7FHqjIAyHpybk"];
 
+function showResponse(response,date,rover){
+	if(response["photos"].length==0){
+		if(date==""){
+		 ReactDOM.render(<i>Invalid date</i>,document.getElementById("divForResults"));
+		}
+		else
+		   ReactDOM.render(<i>No images taken by {rover} on {date}</i>,document.getElementById("divForResults")); 	
+   } 
+	else{
+		var arr=[];
+		var maxNoOfImgs=0;
+		var Mainres=[];
+		var idList=[];
+		var las=0;
+		var las2=0;
+		for(var a=0;a<response["photos"].length;a++){
+		 maxNoOfImgs++;las=a;
+		 if(maxNoOfImgs==50){
+			 idList.push(info1);
+			 var info1=a+1-maxNoOfImgs+"-"+a;
+			 Mainres.push(<LoadRemaining imgList={arr} info={info1} key={info1}/>)
+			 maxNoOfImgs=0;
+			 arr=[];
+			 las2=a;
+		 }
+
+		 const date=response["photos"][a]["camera"]["full_name"];
+					 
+		 const imgUrl=response["photos"][a]["img_src"];
+		 //document.getElementById("divForResults").appendChild(<Image/>);
+		 //console.log(data+" "+title+" "+imgUrl); 
+		 arr.push(<Image url={imgUrl} date={date} key={a}/>);
+	 }
+	 //document.getElementById("divForResults").innerHTML="<a style='display:none'>asda</a>";
+	 
+	 if(las<50){
+		 Mainres.push(<LoadRemaining imgList={arr} info={0+"-"+las} key={las}/>);
+	 }
+	 else if(arr.length!=0){
+		 Mainres.push(<LoadRemaining imgList={arr} info={las2+"-"+las} key={las}/>);
+	 }
+	 
+	 ReactDOM.render(Mainres,document.getElementById("divForResults"));
+	 //document.getElementById("divForResults").onload=function(){alert('ad');}   	
+	}
+}
 
 
 function LoadNasaAPIs(ele){
@@ -74,51 +120,8 @@ function LoadNasaAPIs(ele){
 	req.addEventListener("load", function(){
       if(req.status == 200 && req.readyState == 4){
         var response = JSON.parse(req.responseText);
-      	 //console.log(response);
-  	 	if(response["photos"].length==0){
-  	 		if(date==""){
-				ReactDOM.render(<i>Invalid date</i>,document.getElementById("divForResults"));
-  	 		}
-  	 		else
-      			ReactDOM.render(<i>No images taken by {rover} on {date}</i>,document.getElementById("divForResults")); 	
-      	} 
-       	else{
-       		var arr=[];
-       		var maxNoOfImgs=0;
-       		var Mainres=[];
-       		var idList=[];
-       		var las=0;
-       		var las2=0;
-       		for(var a=0;a<response["photos"].length;a++){
-		    	maxNoOfImgs++;las=a;
-		    	if(maxNoOfImgs==50){
-		    		idList.push(info1);
-		    		var info1=a+1-maxNoOfImgs+"-"+a;
-		    		Mainres.push(<LoadRemaining imgList={arr} info={info1} key={info1}/>)
-		    		maxNoOfImgs=0;
-	    			arr=[];
-	    			las2=a;
-		    	}
-
-	    		const date=response["photos"][a]["camera"]["full_name"];
-	    		    		
-	    		const imgUrl=response["photos"][a]["img_src"];
-	    		//document.getElementById("divForResults").appendChild(<Image/>);
-	    		//console.log(data+" "+title+" "+imgUrl); 
-	    		arr.push(<Image url={imgUrl} date={date} key={a}/>);
-	    	}
-	    	//document.getElementById("divForResults").innerHTML="<a style='display:none'>asda</a>";
-	    	
-	    	if(las<50){
-	    		Mainres.push(<LoadRemaining imgList={arr} info={0+"-"+las} key={las}/>);
-	    	}
-	    	else if(arr.length!=0){
-	    		Mainres.push(<LoadRemaining imgList={arr} info={las2+"-"+las} key={las}/>);
-	    	}
-	    	
-	    	ReactDOM.render(Mainres,document.getElementById("divForResults"));
-			//document.getElementById("divForResults").onload=function(){alert('ad');}   	
-       	}
+      	//console.log(response);
+  	 	showResponse(response,date,rover);
 	}
     else{
     	if(date==""){
