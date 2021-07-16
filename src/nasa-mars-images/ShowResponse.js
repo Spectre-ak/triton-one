@@ -2,7 +2,7 @@ import ReactDOM from "react-dom";
 import { LoadRemaining, Image } from "./MarsImages"
 
 function showResponse(response, date, rover) {
-	console.log(response);
+	//console.log(response);
 
 	if (response.length == 0) {
 		if (date === "") {
@@ -43,12 +43,9 @@ function showResponse(response, date, rover) {
 			const date = response[a]["camera"]["full_name"];
 
 			const imgUrl = response[a]["img_src"];
-			//document.getElementById("divForResults").appendChild(<Image/>);
-			//console.log(data+" "+title+" "+imgUrl); 
 			arr.push(<Image url={imgUrl} date={date} key={a} />);
 		}
-		//document.getElementById("divForResults").innerHTML="<a style='display:none'>asda</a>";
-
+		
 		if (las < 50) {
 			Mainres.push(<LoadRemaining imgList={arr} info={0 + "-" + las} key={las} />);
 		}
@@ -57,10 +54,9 @@ function showResponse(response, date, rover) {
 		}
 
 		ReactDOM.render(Mainres, document.getElementById("divForResults"));
-		//document.getElementById("divForResults").onload=function(){alert('ad');}  
 		
 		
-		console.log(availableCameras);
+		//console.log(availableCameras);
 	}
 }
 
