@@ -4,7 +4,7 @@ import { LoadRemaining, Image } from "./MarsImages"
 function showResponse(response, date, rover) {
 	console.log(response);
 
-	if (response["photos"].length == 0) {
+	if (response.length == 0) {
 		if (date === "") {
 			ReactDOM.render(<i>Invalid date</i>, document.getElementById("divForResults"));
 		}
@@ -21,14 +21,14 @@ function showResponse(response, date, rover) {
 
 		var availableCameras = {};
 
-		for (var a = 0; a < response["photos"].length; a++) {
+		for (var a = 0; a < response.length; a++) {
 
-			if(availableCameras[response.photos[a].camera.full_name]===undefined){
-				availableCameras[response.photos[a].camera.full_name]=[];
-				availableCameras[response.photos[a].camera.full_name].push(response["photos"][a]);
+			if(availableCameras[response[a].camera.full_name]===undefined){
+				availableCameras[response[a].camera.full_name]=[];
+				availableCameras[response[a].camera.full_name].push(response[a]);
 			}
 			else
-			availableCameras[response.photos[a].camera.full_name].push(response["photos"][a]);
+			availableCameras[response[a].camera.full_name].push(response[a]);
 
 			maxNoOfImgs++; las = a;
 			if (maxNoOfImgs == 50) {
@@ -40,9 +40,9 @@ function showResponse(response, date, rover) {
 				las2 = a;
 			}
 
-			const date = response["photos"][a]["camera"]["full_name"];
+			const date = response[a]["camera"]["full_name"];
 
-			const imgUrl = response["photos"][a]["img_src"];
+			const imgUrl = response[a]["img_src"];
 			//document.getElementById("divForResults").appendChild(<Image/>);
 			//console.log(data+" "+title+" "+imgUrl); 
 			arr.push(<Image url={imgUrl} date={date} key={a} />);
