@@ -76,7 +76,7 @@ function LoadNasaAPIs(ele) {
 		if (req.status == 200 && req.readyState == 4) {
 			var response = JSON.parse(req.responseText);
 			//console.log(response);
-			showResponse(response, date, rover);
+			showResponse(response.photos, date, rover);
 
 		}
 		else {
