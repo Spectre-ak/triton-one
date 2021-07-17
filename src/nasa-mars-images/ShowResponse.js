@@ -55,7 +55,7 @@ function showResponse(response, date, rover) {
 
 		ReactDOM.render(Mainres, document.getElementById("divForResults"));
 		
-		
+		availableCameras["all"]=response;
 		//console.log(availableCameras);
 	}
 }
