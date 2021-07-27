@@ -1,6 +1,10 @@
 import ReactDOM from "react-dom";
 import { LoadRemaining, Image } from "./MarsImages"
 
+function LoadCamBasedRes(){
+	
+}
+
 function showResponse(response, date, rover) {
 	//console.log(response);
 
