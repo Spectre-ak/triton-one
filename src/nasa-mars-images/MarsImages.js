@@ -55,6 +55,7 @@ var apiArray = ["gtiZgqXuP8f3OPyjqu21ysauFO8mCOyDPjRKwhJq",
 function LoadNasaAPIs(ele) {
 
 	ReactDOM.render(<Loader />, document.getElementById("divForResults"));
+	ReactDOM.unmountComponentAtNode(document.getElementById("camOptions"));
 	var rover = ele.innerHTML.split(" ")[0];
 	//console.log(rover);
 
@@ -76,6 +77,7 @@ function LoadNasaAPIs(ele) {
 		if (req.status == 200 && req.readyState == 4) {
 			var response = JSON.parse(req.responseText);
 			//console.log(response);
+			
 			showResponse(response.photos, date, rover);
 
 		}
