@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom";
+import CamOptions from "./CamOptions";
 import { LoadRemaining, Image } from "./MarsImages"
 
 function LoadCamBasedRes(){
@@ -61,7 +62,7 @@ function showResponse(response, date, rover) {
 		availableCameras["all"]=response;
 		//console.log(availableCameras);
 		
-
+		ReactDOM.render(<CamOptions ops={availableCameras}/>,document.getElementById("camOptions"))
 		ReactDOM.render(Mainres, document.getElementById("divForResults"));
 		
 
