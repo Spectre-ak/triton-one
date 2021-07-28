@@ -31,6 +31,7 @@ function LoadCamBasedRes(response){
 		else if (arr.length != 0) {
 			Mainres.push(<LoadRemaining imgList={arr} info={las2 + "-" + las} key={las} />);
 		}
+		ReactDOM.unmountComponentAtNode(document.getElementById("divForResults"))
 		ReactDOM.render(Mainres, document.getElementById("divForResults"));
 		
 }
