@@ -1,46 +1,54 @@
 import React from "react";
+import Loader from "../Loader";
+
+function CameraDropdownOps(props){
+    return(
+        <a class="dropdown-item" href="#" onClick={props.selectCam(props.camName)}>{props.camName}</a>
+    )
+}
 
 class CamOptions extends React.Component{
     constructor(props){
         super(props);
+        this.state={
+            cam_ops_render:<Loader/>,
+            selected_cam:"All",
+        }
+        this.selectCam=this.selectCam.bind(this);
     }
 
     componentDidMount(){
         console.log(this.props);
         const cams_arr=[];
         for(var key in this.props.ops){
+            
             console.log(key);
-            if(key==="All")
-                cams_arr.push(
-                    <li className="nav-item" style={{ paddingLeft: "5px" }}>
-                        <a className="nav-link active" id="1" data-toggle="tab" href="#">key</a>
-                    </li>
-                )
-            else
-                cams_arr.push(
-                    <li className="nav-item" style={{ paddingLeft: "5px" }}>
-                        <a className="nav-link" id="1" data-toggle="tab" href="#">key</a>
-                    </li>
-                )
+
+            //cams_arr.push(<a class="dropdown-item" href="#">{key}</a>);
+            cams_arr.push(<CameraDropdownOps selectCam={this.selectCam} camName={key}/>);
+            
 
         }
+        console.log(cams_arr);
+        this.setState({cam_ops_render:cams_arr});
     }
 
     render(){
         return(
-            <ul className="nav nav-pills justify-content-center" >
-					<li className="nav-item" style={{ paddingLeft: "5px" }}>
-						<a className="nav-link active" id="1" data-toggle="tab" href="#" onClick={this.curo}>Curiosity (18 Aug 2012 - present)</a>
-					</li>
-					<li className="nav-item" style={{ paddingRight: "5px" }}>
-						<a className="nav-link" id="3" data-toggle="tab" href="#" onClick={this.oppr}>Opportunity (26 Jan 2004 - 11 Jun 2018)</a>
-					</li>
-
-					<li className="nav-item" style={{ paddingLeft: "5px", paddingRight: "5px" }}>
-						<a className="nav-link" id="2" data-toggle="tab" href="#" onClick={this.spirit}>Spirit (29 Jan 2004 - 22 Mar 2010)</a>
-					</li>
-			</ul>
+            <div class="dropdown">
+                Camera Options:  &nbsp;
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {this.state.selected_cam}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {this.state.cam_ops_render}
+                </div>
+            </div>
         )
+    }
+
+    selectCam(selectedCam){
+        console.log(selectedCam);
     }
 }   
 
