@@ -2,8 +2,37 @@ import ReactDOM from "react-dom";
 import CamOptions from "./CamOptions";
 import { LoadRemaining, Image } from "./MarsImages"
 
-function LoadCamBasedRes(){
-	
+function LoadCamBasedRes(response){
+	var arr = [];
+		var maxNoOfImgs = 0;
+		var Mainres = [];
+		var idList = [];
+		var las = 0;
+		var las2 = 0;
+		for (var a = 0; a < response.length; a++) {
+			maxNoOfImgs++; las = a;
+			if (maxNoOfImgs == 50) {
+				idList.push(info1);
+				var info1 = a + 1 - maxNoOfImgs + "-" + a;
+				Mainres.push(<LoadRemaining imgList={arr} info={info1} key={info1} />)
+				maxNoOfImgs = 0;
+				arr = [];
+				las2 = a;
+			}
+
+			const date = response[a]["camera"]["full_name"];
+
+			const imgUrl = response[a]["img_src"];
+			arr.push(<Image url={imgUrl} date={date} key={a} />);
+		}
+		if (las < 50) {
+			Mainres.push(<LoadRemaining imgList={arr} info={0 + "-" + las} key={las} />);
+		}
+		else if (arr.length != 0) {
+			Mainres.push(<LoadRemaining imgList={arr} info={las2 + "-" + las} key={las} />);
+		}
+		ReactDOM.render(Mainres, document.getElementById("divForResults"));
+		
 }
 
 function showResponse(response, date, rover) {
@@ -70,4 +99,5 @@ function showResponse(response, date, rover) {
 	}
 }
 
-export { showResponse };
+
+export { showResponse, LoadCamBasedRes };
