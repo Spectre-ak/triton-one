@@ -14,6 +14,7 @@ class CamOptions extends React.Component{
         this.state={
             cam_ops_render:<Loader/>,
             selected_cam:"All",
+            selected_cam_count:0,
         }
         
     }
