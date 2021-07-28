@@ -1,9 +1,10 @@
 import React from "react";
 import Loader from "../Loader";
+import { LoadCamBasedRes } from "./ShowResponse";
 
 function CameraDropdownOps(props){
     return(
-        <a class="dropdown-item" href="#" onClick={props.selectCam(props.camName)}>{props.camName}</a>
+        <a class="dropdown-item" href="#" onClick={()=>props.selectCam(props.camName)}>{props.camName}</a>
     )
 }
 
@@ -14,20 +15,16 @@ class CamOptions extends React.Component{
             cam_ops_render:<Loader/>,
             selected_cam:"All",
         }
-        this.selectCam=this.selectCam.bind(this);
+        
     }
 
     componentDidMount(){
-        console.log(this.props);
+        console.log(this.props.ops);
         const cams_arr=[];
         for(var key in this.props.ops){
             
-            console.log(key);
-
-            //cams_arr.push(<a class="dropdown-item" href="#">{key}</a>);
             cams_arr.push(<CameraDropdownOps selectCam={this.selectCam} camName={key}/>);
-            
-
+        
         }
         console.log(cams_arr);
         this.setState({cam_ops_render:cams_arr});
@@ -47,8 +44,10 @@ class CamOptions extends React.Component{
         )
     }
 
-    selectCam(selectedCam){
+    selectCam=(selectedCam)=>{
         console.log(selectedCam);
+        this.setState({selected_cam:selectedCam});
+        LoadCamBasedRes(this.props.ops[selectedCam]);
     }
 }   
 
