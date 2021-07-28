@@ -59,7 +59,7 @@ function showResponse(response, date, rover) {
 		}
 
 		
-		availableCameras["all"]=response;
+		availableCameras["All"]=response;
 		//console.log(availableCameras);
 		
 		ReactDOM.render(<CamOptions ops={availableCameras}/>,document.getElementById("camOptions"))
