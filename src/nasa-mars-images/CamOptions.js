@@ -28,7 +28,10 @@ class CamOptions extends React.Component{
         
         }
         console.log(cams_arr);
-        this.setState({cam_ops_render:cams_arr});
+        this.setState({
+            cam_ops_render:cams_arr,
+            selected_cam_count:this.props.ops["All"].length
+        });
     }
 
     render(){
@@ -36,7 +39,7 @@ class CamOptions extends React.Component{
             <div class="dropdown">
                 Camera Options:  &nbsp;
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {this.state.selected_cam}
+                    {this.state.selected_cam}&nbsp;({this.state.selected_cam_count})
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     {this.state.cam_ops_render}
@@ -47,7 +50,9 @@ class CamOptions extends React.Component{
 
     selectCam=(selectedCam)=>{
         console.log(selectedCam);
-        this.setState({selected_cam:selectedCam});
+        this.setState({
+            selected_cam:selectedCam, 
+            selected_cam_count:this.props.ops[selectedCam].length});
         LoadCamBasedRes(this.props.ops[selectedCam]);
     }
 }   
