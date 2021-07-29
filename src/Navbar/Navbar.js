@@ -36,7 +36,9 @@ export default function Navbar(){
                 <li class="nav-item">
                   {/* <a class="nav-link" href="#">Mars Images</a>
                    */}
-                  <Link class="nav-link" to="/mars-images"><h5>Mars Images</h5></Link>
+                  <Link class="nav-link" to="/mars-images"><h5>Mars Images 
+                    <sup><sup><a href="#" class="badge badge-primary">NEW</a></sup></sup>
+                    </h5></Link>
                 </li>
                 
                 {/* <li class="nav-item">
