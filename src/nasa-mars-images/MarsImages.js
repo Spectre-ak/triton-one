@@ -189,6 +189,8 @@ class NasaMarsApi extends React.Component {
 				
 
 				</div>
+
+				<br/>
 				
 				<div id="divForResults" onScroll={this.scroll}></div>
 
