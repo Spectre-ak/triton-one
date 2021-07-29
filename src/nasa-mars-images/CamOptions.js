@@ -20,14 +20,14 @@ class CamOptions extends React.Component{
     }
 
     componentDidMount(){
-        console.log(this.props.ops);
+        //console.log(this.props.ops);
         const cams_arr=[];
         for(var key in this.props.ops){
             
             cams_arr.push(<CameraDropdownOps selectCam={this.selectCam} camName={key} key={key} camCount={this.props.ops[key].length}/>);
         
         }
-        console.log(cams_arr);
+        //console.log(cams_arr);
         this.setState({
             cam_ops_render:cams_arr,
             selected_cam_count:this.props.ops["All"].length
@@ -49,7 +49,7 @@ class CamOptions extends React.Component{
     }
 
     selectCam=(selectedCam)=>{
-        console.log(selectedCam);
+        //console.log(selectedCam);
         this.setState({
             selected_cam:selectedCam, 
             selected_cam_count:this.props.ops[selectedCam].length});
