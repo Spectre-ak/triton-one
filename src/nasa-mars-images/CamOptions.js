@@ -4,7 +4,7 @@ import { LoadCamBasedRes } from "./ShowResponse";
 
 function CameraDropdownOps(props){
     return(
-        <a class="dropdown-item" onClick={()=>props.selectCam(props.camName)} style={{cursor:"pointer"}}>{props.camName}</a>
+        <a class="dropdown-item" onClick={()=>props.selectCam(props.camName)} style={{cursor:"pointer"}}>{props.camName}&nbsp;({props.camCount})</a>
     )
 }
 
@@ -24,7 +24,7 @@ class CamOptions extends React.Component{
         const cams_arr=[];
         for(var key in this.props.ops){
             
-            cams_arr.push(<CameraDropdownOps selectCam={this.selectCam} camName={key} key={key}/>);
+            cams_arr.push(<CameraDropdownOps selectCam={this.selectCam} camName={key} key={key} camCount={this.props.ops[key].length}/>);
         
         }
         console.log(cams_arr);
