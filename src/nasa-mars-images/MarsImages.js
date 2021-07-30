@@ -52,12 +52,12 @@ var apiArray = ["gtiZgqXuP8f3OPyjqu21ysauFO8mCOyDPjRKwhJq",
 	"W9OdIjEe1fWDQYstoh8lHgf1GtHKBAdbkS1VzcQ5", "5B6oJsSCQyekXZvNOKpsUhRPl1e7FHqjIAyHpybk"];
 
 
-function LoadNasaAPIs(ele) {
+function LoadNasaAPIs(rover) {
 
 	ReactDOM.render(<Loader />, document.getElementById("divForResults"));
 	ReactDOM.unmountComponentAtNode(document.getElementById("camOptions"));
-	var rover = ele.innerHTML.split(" ")[0];
-	//console.log(rover);
+
+	console.log(rover);
 
 	var date = document.getElementById("date").value;
 
@@ -102,7 +102,7 @@ class NasaMarsApi extends React.Component {
 		this.curo = this.curo.bind(this);
 		this.spirit = this.spirit.bind(this);
 		this.oppr = this.oppr.bind(this);
-
+		this.pers=this.pers.bind(this);
 
 	}
 	componentDidMount() {
@@ -162,10 +162,15 @@ class NasaMarsApi extends React.Component {
 						<input class="form-control " type="date" id="date" style={{ color: "white", backgroundColor: "rgb(60 60 65)", borderRadius: "6px" }} />
 					</div>
 				</div>
-
+	
 				<ul className="nav nav-pills justify-content-center" >
+					
 					<li className="nav-item" style={{ paddingLeft: "5px" }}>
-						<a className="nav-link active" id="1" data-toggle="tab" href="#" onClick={this.curo}>Curiosity (18 Aug 2012 - present)</a>
+						<a className="nav-link active" id="0" data-toggle="tab" href="#" onClick={this.pers}>Perseverance (18 Feb 2021 - present)</a>
+					</li>
+
+					<li className="nav-item" style={{ paddingLeft: "5px" }}>
+						<a className="nav-link" id="1" data-toggle="tab" href="#" onClick={this.curo}>Curiosity (18 Aug 2012 - present)</a>
 					</li>
 					<li className="nav-item" style={{ paddingRight: "5px" }}>
 						<a className="nav-link" id="3" data-toggle="tab" href="#" onClick={this.oppr}>Opportunity (26 Jan 2004 - 11 Jun 2018)</a>
@@ -199,7 +204,10 @@ class NasaMarsApi extends React.Component {
 	}
 
 	onChangeInput(ele) {
-		//console.log(document.getElementById("date").value);
+		if (document.getElementById("0").className == "nav-link active") {
+
+			this.pers();
+		}
 		if (document.getElementById("1").className == "nav-link active") {
 
 			this.curo();
@@ -214,13 +222,16 @@ class NasaMarsApi extends React.Component {
 		}
 	}
 	curo() {
-		LoadNasaAPIs(document.getElementById("1"));
+		LoadNasaAPIs("Curiosity");
 	}
 	spirit() {
-		LoadNasaAPIs(document.getElementById("2"));
+		LoadNasaAPIs("Spirit");
 	}
 	oppr() {
-		LoadNasaAPIs(document.getElementById("3"));
+		LoadNasaAPIs("Opportunity");
+	}
+	pers(){
+		LoadNasaAPIs("Perseverance");
 	}
 
 
