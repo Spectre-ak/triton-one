@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import Loader from '../Loader';
 import { showResponse } from './ShowResponse';
@@ -31,12 +31,13 @@ function LoadRemaining(props) {
 }
 function Image(props) {
 	const url = props.url;
-	const date = props.date;
-
+	const name = props.date;
+	const [load_container,handler] = useState(<Loader/>);
 	return (
 		<div className="container" style={{ paddingBottom: "40px" }} align="center">
-			<p>{date}</p>
-			<img src={url} className="img-fluid" />
+			<p>{name}</p>
+			{load_container}
+			<img src={url} className="img-fluid" onLoad={()=>handler(null)}/>
 		</div>
 	)
 }
@@ -190,8 +191,7 @@ class NasaMarsApi extends React.Component {
 				<br />
 
 				<div id="camOptions">
-					
-				
+
 
 				</div>
 
