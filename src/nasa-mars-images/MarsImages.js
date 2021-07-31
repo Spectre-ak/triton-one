@@ -47,7 +47,11 @@ function Image(props) {
 		<div className="container-fluid" style={{ paddingBottom: "40px" }} align="center">
 			<p>{name}</p>
 			{load_container}
-			<img src={url} className="img-fluid" onLoad={() => handler(null)} onClick={()=>handler_modal_style(displayBlock)}/>
+			
+			{/* onClick={()=>handler_modal_style(displayBlock)}
+			 */}
+			 
+			<img src={url} className="img-fluid" onLoad={() => handler(null)} />
 			
 			<div class="modal fade show" tabindex="-1" style={modalStyle} aria-hidden="true">
 
