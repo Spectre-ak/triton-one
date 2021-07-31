@@ -32,12 +32,47 @@ function LoadRemaining(props) {
 function Image(props) {
 	const url = props.url;
 	const name = props.date;
-	const [load_container,handler] = useState(<Loader/>);
+
+	const displayNone={display:"none"};
+	const displayBlock={display:"block"};
+
+	const [load_container,  handler] = useState(<Loader />);
+
+	const [load_container2,  handler2] = useState(<Loader />);
+
+
+	const [modalStyle, handler_modal_style] = useState(displayNone);
+
 	return (
-		<div className="container" style={{ paddingBottom: "40px" }} align="center">
+		<div className="container-fluid" style={{ paddingBottom: "40px" }} align="center">
 			<p>{name}</p>
 			{load_container}
-			<img src={url} className="img-fluid" onLoad={()=>handler(null)}/>
+			<img src={url} className="img-fluid" onLoad={() => handler(null)} onClick={()=>handler_modal_style(displayBlock)}/>
+			
+			<div class="modal fade show" tabindex="-1" style={modalStyle} aria-hidden="true">
+
+				<div class="modal-dialog modal-xl" >
+					<div class="modal-content" style={{backgroundColor:"#121111"}}>
+						
+						<div style={{textAlign:"right"}}>
+							<button type="button" class="close" style={{color:"white"}} data-dismiss="modal" aria-hidden="true" onClick={()=>handler_modal_style(displayNone)}>×</button>
+						
+						</div>
+							
+						<div class="modal-body" style={{overflow:"auto"}}>
+
+							{load_container2}
+							<img src={url} className="img-fluid" onLoad={() => handler2(null)} style={{height:"max"}}/>
+			
+							
+						</div>
+						
+							<button type="button" class="btn btn-outline-primary" data-dismiss="modal" onClick={()=>handler_modal_style(displayNone)}>Close</button>
+						
+					</div>
+				</div>
+			</div>
+
 		</div>
 	)
 }
@@ -78,7 +113,7 @@ function LoadNasaAPIs(rover) {
 		if (req.status == 200 && req.readyState == 4) {
 			var response = JSON.parse(req.responseText);
 			//console.log(response);
-			
+
 			showResponse(response.photos, date, rover);
 
 		}
@@ -103,7 +138,7 @@ class NasaMarsApi extends React.Component {
 		this.curo = this.curo.bind(this);
 		this.spirit = this.spirit.bind(this);
 		this.oppr = this.oppr.bind(this);
-		this.pers=this.pers.bind(this);
+		this.pers = this.pers.bind(this);
 
 	}
 	componentDidMount() {
@@ -163,9 +198,9 @@ class NasaMarsApi extends React.Component {
 						<input class="form-control " type="date" id="date" style={{ color: "white", backgroundColor: "rgb(60 60 65)", borderRadius: "6px" }} />
 					</div>
 				</div>
-	
+
 				<ul className="nav nav-pills justify-content-center" >
-					
+
 					<li className="nav-item" style={{ paddingLeft: "5px" }}>
 						<a className="nav-link active" id="0" data-toggle="tab" href="#" onClick={this.pers}>Perseverance (18 Feb 2021 - present)</a>
 					</li>
@@ -195,8 +230,8 @@ class NasaMarsApi extends React.Component {
 
 				</div>
 
-				<br/>
-				
+				<br />
+
 				<div id="divForResults" onScroll={this.scroll}></div>
 
 			</div>
@@ -230,7 +265,7 @@ class NasaMarsApi extends React.Component {
 	oppr() {
 		LoadNasaAPIs("Opportunity");
 	}
-	pers(){
+	pers() {
 		LoadNasaAPIs("Perseverance");
 	}
 
