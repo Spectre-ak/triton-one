@@ -50,7 +50,7 @@ function Image(props) {
 			
 			{/* onClick={()=>handler_modal_style(displayBlock)}
 			 */}
-			 
+			
 			<img src={url} className="img-fluid" onLoad={() => handler(null)} />
 			
 			<div class="modal fade show" tabindex="-1" style={modalStyle} aria-hidden="true">
