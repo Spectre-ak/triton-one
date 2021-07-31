@@ -255,3 +255,13 @@ iframe{
   text-align: left;
 }
 
+
+
+/* image view inside modal*/
+
+.modal-body {
+  position: relative;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+   padding: 0rem !important; 
+}
