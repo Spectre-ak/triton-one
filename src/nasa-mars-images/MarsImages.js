@@ -93,7 +93,7 @@ function LoadNasaAPIs(rover) {
 	ReactDOM.render(<Loader />, document.getElementById("divForResults"));
 	ReactDOM.unmountComponentAtNode(document.getElementById("camOptions"));
 
-	console.log(rover);
+	//console.log(rover);
 
 	var date = document.getElementById("date").value;
 
