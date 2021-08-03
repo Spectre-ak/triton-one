@@ -88,15 +88,10 @@ function showResponse(response, date, rover) {
 			Mainres.push(<LoadRemaining imgList={arr} info={las2 + "-" + las} key={las} />);
 		}
 
-		
 		availableCameras["All"]=response;
-		//console.log(availableCameras);
-		
 		ReactDOM.render(<CamOptions ops={availableCameras}/>,document.getElementById("camOptions"))
 		ReactDOM.render(Mainres, document.getElementById("divForResults"));
-		
-
-		
+				
 	}
 }
 
