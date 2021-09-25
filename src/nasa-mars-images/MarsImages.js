@@ -33,12 +33,12 @@ function Image(props) {
 	const url = props.url;
 	const name = props.date;
 
-	const displayNone={display:"none"};
-	const displayBlock={display:"block"};
+	const displayNone = { display: "none" };
+	const displayBlock = { display: "block" };
 
-	const [load_container,  handler] = useState(<Loader />);
+	const [load_container, handler] = useState(<Loader />);
 
-	const [load_container2,  handler2] = useState(<Loader />);
+	const [load_container2, handler2] = useState(<Loader />);
 
 
 	const [modalStyle, handler_modal_style] = useState(displayNone);
@@ -47,32 +47,32 @@ function Image(props) {
 		<div className="container-fluid" style={{ paddingBottom: "40px" }} align="center">
 			<p>{name}</p>
 			{load_container}
-			
+
 			{/* onClick={()=>handler_modal_style(displayBlock)}
 			 */}
-			
+
 			<img src={url} className="img-fluid" onLoad={() => handler(null)} />
-			
+
 			<div class="modal fade show" tabindex="-1" style={modalStyle} aria-hidden="true">
 
 				<div class="modal-dialog modal-xl" >
-					<div class="modal-content" style={{backgroundColor:"#121111"}}>
-						
-						<div style={{textAlign:"right"}}>
-							<button type="button" class="close" style={{color:"white"}} data-dismiss="modal" aria-hidden="true" onClick={()=>handler_modal_style(displayNone)}>×</button>
-						
+					<div class="modal-content" style={{ backgroundColor: "#121111" }}>
+
+						<div style={{ textAlign: "right" }}>
+							<button type="button" class="close" style={{ color: "white" }} data-dismiss="modal" aria-hidden="true" onClick={() => handler_modal_style(displayNone)}>×</button>
+
 						</div>
-							
-						<div class="modal-body" style={{overflow:"auto"}}>
+
+						<div class="modal-body" style={{ overflow: "auto" }}>
 
 							{load_container2}
-							<img src={url} className="img-fluid" onLoad={() => handler2(null)} style={{height:"max"}}/>
-			
-							
+							<img src={url} className="img-fluid" onLoad={() => handler2(null)} style={{ height: "max" }} />
+
+
 						</div>
-						
-							<button type="button" class="btn btn-outline-primary" data-dismiss="modal" onClick={()=>handler_modal_style(displayNone)}>Close</button>
-						
+
+						<button type="button" class="btn btn-outline-primary" data-dismiss="modal" onClick={() => handler_modal_style(displayNone)}>Close</button>
+
 					</div>
 				</div>
 			</div>
@@ -146,10 +146,7 @@ class NasaMarsApi extends React.Component {
 
 	}
 	componentDidMount() {
-		try {
-			if (document.getElementById("collapsingNavbar3").className === "navbar-collapse w-100 collapse show")
-				document.getElementById("buttonForNavbarCollapse").click();
-		} catch (er) { }
+
 	}
 	render() {
 		return (
