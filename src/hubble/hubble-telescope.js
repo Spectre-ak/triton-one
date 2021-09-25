@@ -1,22 +1,20 @@
 import ReactDOM from "react-dom";
 import React, { useState, useEffect } from 'react';
-import ReactPaginate from 'react-paginate';
 import PaginationHubble from "./PageDivsHubble";
 
 function ImageVidOps(props) {
-    const [ops, setCount] = useState(1);
-    useEffect(() => {
-        props.getOption(ops);
-    });
+    const changeOption = (e) =>{
+        props.getOption(e);
+    };
     return (
         <form>
-            <div class="form-check form-check-inline" onClick={() => setCount(1)} >
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultChecked />
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultChecked onClick={() => changeOption(1)}/>
                 <label class="form-check-label" for="inlineRadio1" >Images</label>
             </div>
-            <div class="form-check form-check-inline" onClick={() => setCount(2)}>
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                <label class="form-check-label" for="inlineRadio2">Videos</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onClick={() => changeOption(2)}/>
+                <label class="form-check-label" for="inlineRadio2" >Videos</label>
             </div>
         </form>
     )
@@ -30,15 +28,15 @@ class HubbleTelescope extends React.Component {
         super(props);
         this.state = { show: "false", ops: 2 };
         this.state = {
-            //urlToFetch:"http://localhost:8080/hubble/images" https://triton-one-backend.azurewebsites.net/
-            urlToFetch: "https://triton-one-backend.azurewebsites.net/hubble/images"
+            urlToFetch: "https://hubblesite.azurewebsites.net/",
+            selectedOption: "all/images",
 
         };
         this.loadResults = this.loadResults.bind(this);
     }
 
     componentDidMount() {
-        
+
     }
     render() {
         return (
@@ -48,7 +46,7 @@ class HubbleTelescope extends React.Component {
                 <br />
                 <ImageVidOps getOption={this.getOption} /><br />
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="searchIDDescription" type="search" placeholder="M87.." style={{
+                    <input class="form-control" id="searchIDDescription" type="search" placeholder="M87.." style={{
                         borderRadius: "40px", borderColor: "#007bff",
                         backgroundColor: "transparent", color: "white"
                     }} aria-label="searchBox" aria-describedby="basic-addon2" />
@@ -65,7 +63,7 @@ class HubbleTelescope extends React.Component {
     loadResults() {
         ReactDOM.unmountComponentAtNode(document.getElementById("divForResults"));
         const searchParam = document.getElementById("searchIDDescription").value;
-        const media_type = this.state.ops === 1 ? "image" : "video";
+        const media_type = this.state.selectedOption === "all/images" ? "image" : "video";
         ReactDOM.render(<PaginationHubble urlToFetch={this.state.urlToFetch} media_type={media_type}
             search={searchParam} />, document.getElementById("divForResults"));
         window.history.pushState('', "", "/hubble-gallery/" + media_type + "~search~" + searchParam);
@@ -73,46 +71,16 @@ class HubbleTelescope extends React.Component {
 
     }
     getOption = (e) => {
-        this.state.ops = e;
-        if (e === 1)
-            this.state.urlToFetch = "https://triton-one-backend.azurewebsites.net/hubble/images";
-        else
-            this.state.urlToFetch = "https://triton-one-backend.azurewebsites.net/hubble/videos";
+        console.log(e);
+        const selectedOption = e === 1 ? "all/images" : "all/videos";
+        this.setState({
+            selectedOption: selectedOption
+        }, () => {
+            //console.log(this.state);
+        });
 
     };
 
 }
 export { ImageVidOps };
 export default HubbleTelescope;
-
-/*
-        this.handleClick = this.handleClick.bind(this);
-        this.updateOps=this.updateOps.bind(this);
-
-updateOps(e){
-        const newOps=e;
-        this.setState({ops:newOps});
-    }
-    handleClick() {
-        this.setState({ show: "true" })
-    };
-
-function HubbleTelescope() {
-  const [count, setCount] = useState(0);
-
-  // Similar to componentDidMount and componentDidUpdate:
-  useEffect(() => {
-
-  });
-
-  return (
-    <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
-      <p>as</p>
-    </div>
-  );
-}
-*/
