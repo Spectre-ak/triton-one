@@ -174,7 +174,10 @@ class NasaApi extends React.Component{
 		window.history.pushState('',"","/library/"+media_type+"~search~"+ded);
 	}
 	getOption=(e)=>{
-        this.state.ops=e;
+        //this.state.ops=e;
+		this.setState({
+			ops:e
+		});
         //console.log(this.state)
     };
 }
