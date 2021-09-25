@@ -5,16 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Navbar from './Navbar/Navbar';
 
-function Holder(){
-  return(
-    <div>
-      <Navbar/>
-    </div>
-  )
-}
-
 ReactDOM.render(
-  <Holder/>,
+  <div>
+      <Navbar/>
+  </div>,
   document.getElementById('root')
 );
 
