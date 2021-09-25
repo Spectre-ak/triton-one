@@ -18,10 +18,6 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-fetch("https://triton-one-backend.azurewebsites.net/").then(response=>response.text()).then(res=>{
-  //console.log(res)
-});
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-//reportWebVitals(console.log);
+fetch("https://triton-one-backend.azurewebsites.net/").catch(err => {
+  
+})
