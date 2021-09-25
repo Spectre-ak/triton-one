@@ -13,65 +13,72 @@ import Home from "../home/Home";
 import img from "./logoRo.png";
 import triton_black from "./triton_black.png";
 
-export default function Navbar(){
-    return (
-        <Router>
+export default function Navbar() {
+  return (
+    <Router>
       <div>
-        
-      <div className="container-fluid">
+        <div className="container-fluid">
           <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
             <a href="/" class="navbar-brand d-flex mr-auto"><h2>Triton</h2>
-            <span></span>
-            </a> <img src={triton_black} width="34x" id="logoBrand" style={{marginLeft:"5px",marginRight:"5px"}}/>
+              <span></span>
+            </a> <img src={triton_black} width="34x" id="logoBrand" style={{ marginLeft: "5px", marginRight: "5px" }} alt="" />
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3" id="buttonForNavbarCollapse">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse w-100 collapse" id="collapsingNavbar3">
               <ul class="navbar-nav w-100 justify-content-center">
                 <li class="nav-item">
-                  {/* <a class="nav-link" href="#"></a>
-                   */}
-                  <Link class="nav-link" data-toggle="collapse" to="/library"><h5>Media Library</h5></Link>
+                  <Link class="nav-link" data-toggle="collapse" to="/library">
+                    <h5>
+                      Media Library
+                    </h5>
+                  </Link>
                 </li>
                 <li class="nav-item">
-                  {/* <a class="nav-link" href="#">Mars Images</a>
-                   */}
-                  <Link class="nav-link" to="/mars-images"><h5>Mars Images 
-                    <sup><sup><a href="#" class="badge badge-primary">NEW</a></sup></sup>
-                    </h5></Link>
+                  <Link class="nav-link" to="/mars-images">
+                    <h5>
+                      Mars Images
+                      <sup><sup><span class="badge badge-primary">NEW</span></sup></sup>
+                    </h5>
+                  </Link>
                 </li>
-                
                 {/* <li class="nav-item">
-  
-                  <Link class="nav-link" to="/hubble-gallery"><h5>Hubble Telescope</h5></Link>
+                  <Link class="nav-link" to="/hubble-gallery">
+                    <h5>
+                      Hubble Telescope
+                      <sup><sup><span class="badge badge-primary">NEW</span></sup></sup>
+                    </h5>
+                  </Link>
                 </li> */}
-                
                 <li class="nav-item">
-                  <a class="nav-link" href="https://triton-one.azurewebsites.net/iss-location"><h5>ISS Location</h5></a>
-                
-                  {/* <Link class="nav-link" to="/users">users</Link>
-                 */}
+                  <a class="nav-link" href="https://triton-one.azurewebsites.net/iss-location">
+                    <h5>
+                      ISS Location
+                    </h5>
+                  </a>
                 </li>
-                
                 <li class="nav-item">
-                  {/* <a class="nav-link" href="#">Articles</a>
-                   */}
-                  <Link class="nav-link" to="/articles"><h5>News</h5></Link>
+                  <Link class="nav-link" to="/articles">
+                    <h5>
+                      News
+                    </h5>
+                  </Link>
                 </li>
               </ul>
               <ul class="nav navbar-nav ml-auto justify-content-end">
                 <li class="nav-item">
-                   <big><big><big><big><a href="#" className="githubLogo"> <i class="fab fa-github" aria-hidden="true" id="githubLogo" onClick={()=>{window.location.href="https://github.com/Spectre-ak/triton-one"}}></i></a></big> </big></big></big>
+                  <big><big>
+                    <big><big>
+                      <span className="githubLogo"> 
+                        <i class="fab fa-github" aria-hidden="true" id="githubLogo" onClick={() => { window.location.href = "https://github.com/Spectre-ak/triton-one" }}></i>
+                      </span>
+                    </big></big>
+                  </big></big>
                 </li>
-    
               </ul>
             </div>
           </nav>
         </div>
-
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/library">
             <NasaApi />
@@ -80,18 +87,17 @@ export default function Navbar(){
             <NasaMarsApi />
           </Route>
           <Route path="/hubble-gallery">
-            <HubbleTelescope/>
+            <HubbleTelescope />
           </Route>
           <Route path="/articles">
-            <News/>
+            <News />
           </Route>
-
           <Route path="/">
             <Home />
           </Route>
         </Switch>
       </div>
     </Router>
-        
-      );
+
+  );
 }
