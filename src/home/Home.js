@@ -138,18 +138,22 @@ export default class Home extends React.Component {
         return (
 
             <div className="container-fluid">
-                <br/>
+                <br />
                 <div class="row text-center">
                     <div class="col-12 col-lg-3">
-                        <h4 style={{textAlign:"left"}}>Upcoming SpaceX launches</h4>
-                        <SpaceX/>
+                        <h4 style={{ textAlign: "left" }}>Upcoming SpaceX launches</h4>
+                        <SpaceX />
                     </div>
 
                     <div class="col-12 col-lg-6">
-                    <div className="container">
-                            <p style={{textAlign:"left"}}>Astronomy Picture of the Day <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank"><i class="fa fa-arrow-right" aria-hidden="true"></i></a></p>
+                        <div className="container">
+                            <p style={{ textAlign: "left" }}>
+                                <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank" rel="noreferrer">
+                                    <h6>Astronomy Picture of the Day <i class="fa fa-arrow-right" aria-hidden="true"></i></h6>
+                                </a>
+                            </p>
                             <hr />
-                            <h4 style={{textAlign:"left"}}>NASA's APOD Images</h4>
+                            <h4 style={{ textAlign: "left" }}>NASA's APOD Images</h4>
                             {this.state.postData}
                             <br />
                             <div className="container" style={{ overflowX: "auto", overflowY: "hidden" }} >
@@ -179,7 +183,7 @@ export default class Home extends React.Component {
 
                     <div class="col-12 col-lg-3">
                         <h4>Trending News</h4>
-                        <MarsNews/>
+                        <MarsNews />
                     </div>
                 </div>
 

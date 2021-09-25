@@ -68,12 +68,6 @@ function LoadNasaAPIs(topic, description) {
 
 }
 
-
-
-
-
-
-
 class NasaApi extends React.Component {
 	constructor(props) {
 		super(props);

@@ -20,8 +20,6 @@ function ImageVidOps(props) {
     )
 }
 
-
-
 class HubbleTelescope extends React.Component {
 
     constructor(props) {
