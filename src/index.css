@@ -239,6 +239,7 @@ iframe{
 
 .githubLogo{
   color: #8810ff;
+  cursor: pointer;
 }
 
 .border-secondary {
