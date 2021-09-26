@@ -77,9 +77,9 @@ export default function Navbar() {
               <ul className="nav navbar-nav ml-auto justify-content-end">
                 <li className="nav-item">
                   <big><big>
-                    <big><big>
-                      <span classNameName="githubLogo">
-                        <i className="fab fa-github" aria-hidden="true" id="githubLogo" onClick={() => { window.location.href = "https://github.com/Spectre-ak/triton-one" }}></i>
+                    <big><big> 
+                      <span className="githubLogo"> 
+                        <i className="fab fa-github" aria-hidden="true" id="githubLogo" onClick={() => { window.open('https://github.com/Spectre-ak/triton-one', '_blank') }}></i>
                       </span>
                     </big></big>
                   </big></big>
