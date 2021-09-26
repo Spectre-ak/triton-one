@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ImageVidOps } from '../hubble/hubble-telescope';
-//import '../index.css';
 import Loader from '../Loader';
 import AppPage from './PageDivs';
-
 function Image(props) {
 	const url = props.url;
 	const title = props.title;
@@ -21,7 +19,6 @@ function Image(props) {
 		</div>
 	)
 }
-
 function getRandomInt(min, max) {
 	min = Math.ceil(min);
 	max = Math.floor(max);
@@ -33,10 +30,6 @@ var apiArray = ["gtiZgqXuP8f3OPyjqu21ysauFO8mCOyDPjRKwhJq",
 
 function LoadNasaAPIs(topic, description) {
 	topic = topic.toLowerCase();
-
-	//console.log(topic); 
-	//console.log(description);
-	//console.log(getRandomInt(0,4));
 	var apiKey = apiArray[getRandomInt(0, 3)];
 	var req = new XMLHttpRequest();
 	var url = "https://images-api.nasa.gov/search?q=" + topic + "&media_type=image&description=" + description;
@@ -47,9 +40,6 @@ function LoadNasaAPIs(topic, description) {
 	req.addEventListener("load", function () {
 		if (req.status == 200 && req.readyState == 4) {
 			var response = JSON.parse(req.responseText);
-			// console.log(response);
-			// console.log(response["collection"]["items"]); https://newsapi.org/v2/everything?q=apple&from=2021-05-24&to=2021-05-24&sortBy=popularity&apiKey=813b3f8508a44d42a1f0d601f6ece902
-
 			if (response["collection"]["items"].length == 0) {
 				ReactDOM.render(<i>No results found</i>, document.getElementById("divForResults"));
 			}
@@ -65,9 +55,7 @@ function LoadNasaAPIs(topic, description) {
 			}
 		}
 	});
-
 }
-
 class NasaApi extends React.Component {
 	constructor(props) {
 		super(props);
@@ -81,19 +69,8 @@ class NasaApi extends React.Component {
 				<h4>Enter the image query topic or description in keywords <small><small>(Ex: mars,andromeda)</small></small></h4>
 				<p>Credits: NASA's Image Library<a href="https://api.nasa.gov/"> <i className="fa fa-arrow-right" aria-hidden="true"></i></a></p>
 				<br />
-				{/* <input className="form-control border-secondary py-2" id="searchIDTopic" type="search" placeholder="Topic.." style={{color:"white", borderRadius:"40px",backgroundColor:"#131316"}}></input>	
-				<br/> */}
-				{/* <input className="form-control border-secondary py-2" id="searchIDDescription" type="search" placeholder="Mars.." style={{color:"white", borderRadius:"40px",backgroundColor:"#131316"}}></input>	
-				<br/> */}
 				<ImageVidOps getOption={this.getOption} />
-				{/* <p align="center">
-					<button className="btn btn-outline-primary" onClick={this.onChangeInput}>Search...</button>
-				</p>
-				<br/> */}
-
 				<br />
-
-
 				<div class="input-group mb-3">
 					<input type="text" class="form-control" id="searchIDDescription" type="search" placeholder="Mars.." style={{
 						borderRadius: "40px", borderColor: "#007bff",
@@ -102,16 +79,11 @@ class NasaApi extends React.Component {
 					<div class="input-group-append">
 						<button class="btn btn-outline-primary" type="button" style={{ borderRadius: "40px" }}
 							onClick={this.onChangeInput}>Search</button>
-
 					</div>
 				</div>
-
 				<br />
-
 				<div id="divForResults">
-
 				</div>
-
 			</div>
 		)
 	}
@@ -147,26 +119,18 @@ class NasaApi extends React.Component {
 		}, 500);
 	}
 	onChangeInput(ele) {
-
-		//const topic=encodeURI(document.getElementById("searchIDTopic").value);
 		const desc = encodeURI(document.getElementById("searchIDDescription").value + "".replace(" ", ","));
 		var ded = document.getElementById("searchIDDescription").value + "";
 		ded = ded.replace(/\s+/g, ',');
-
-		//console.log(topic,desc);
 		const media_type = this.state.ops === 1 ? "image" : "video";
-		//console.log(ded,media_type);
 		ReactDOM.unmountComponentAtNode(document.getElementById("divForResults"));
 		ReactDOM.render(<AppPage topic={""} desc={desc} keywords={ded} media_type={media_type} />, document.getElementById("divForResults"));
-
 		window.history.pushState('', "", "/library/" + media_type + "~search~" + ded);
 	}
 	getOption = (e) => {
-		//this.state.ops=e;
 		this.setState({
 			ops: e
 		});
-		//console.log(this.state)
 	};
 }
 
