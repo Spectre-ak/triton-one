@@ -1,6 +1,7 @@
 import ReactDOM from "react-dom";
-import React, { useState, useEffect } from 'react';
-import PaginationHubble from "./PageDivsHubble";
+import React from 'react';
+import PaginationHubble from "./Pagination";
+import Loader from "../Loader";
 
 function ImageVidOps(props) {
     const changeOption = (e) =>{
@@ -20,6 +21,7 @@ function ImageVidOps(props) {
     )
 }
 
+
 class HubbleTelescope extends React.Component {
 
     constructor(props) {
@@ -28,13 +30,25 @@ class HubbleTelescope extends React.Component {
         this.state = {
             urlToFetch: "https://hubblesite.azurewebsites.net/",
             selectedOption: "all/images",
-
+            results:<Loader/>
         };
         this.loadResults = this.loadResults.bind(this);
     }
-
+    
     componentDidMount() {
-
+        this.fetchAllImgVid();
+    }
+    fetchAllImgVid(){
+        fetch(this.state.urlToFetch+this.state.selectedOption).then(res=>res.json()).then(res=>{
+            //console.log(res);
+            res.forEach(element=>{
+                const data=JSON.parse(element);
+                console.log(data);
+            });
+            this.setState({
+                results:"Laoded"
+            })
+        });
     }
     render() {
         return (
@@ -54,7 +68,9 @@ class HubbleTelescope extends React.Component {
                     </div>
                 </div>
                 <br />
-                <div id="divForResults"></div>
+                <div id="divForResults">
+                    {this.state.results}
+                </div>
             </div>
         )
     }
