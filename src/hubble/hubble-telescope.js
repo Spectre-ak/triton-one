@@ -2,6 +2,7 @@ import ReactDOM from "react-dom";
 import React from 'react';
 import PaginationHubble from "./Pagination";
 import Loader from "../Loader";
+import ImageComponent from "./Image";
 
 function ImageVidOps(props) {
     const changeOption = (e) =>{
@@ -40,10 +41,11 @@ class HubbleTelescope extends React.Component {
     }
     fetchAllImgVid(){
         fetch(this.state.urlToFetch+this.state.selectedOption).then(res=>res.json()).then(res=>{
-            //console.log(res);
+            const data_def=[];
             res.forEach(element=>{
                 const data=JSON.parse(element);
                 console.log(data);
+                data_def.push(<ImageComponent data={data}/>);
             });
             this.setState({
                 results:"Laoded"
