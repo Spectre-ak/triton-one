@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { LoaderWithoutTimer } from '../Loader';
 
 /*
 
@@ -20,17 +21,22 @@ const BootstrapSmallLoader = () => {
 function ImageComponent(props) {
     const [imgUrl, setImgUrl] = useState(0);
     const [imgResolutions, setImgResolutions] = useState(0);
-    const imgLoader
+    const [imgOnLoadWait, setImgOnLoadWait] = useState(<LoaderWithoutTimer/>);
+
     useEffect(() => {
-        const resolutions = props.data.imgWithRes;
+        const resolutions = {};
         props.data.imgWithRes.forEach(element => {
+            console.log(element);
             resolutions[element[1]] = element[0];
         });
-        setImgResolutions(<MediaOptions res={resolutions} updateMediaContent={setImgUrl} />);
+        console.log(resolutions);
+
+        setImgResolutions(<MediaOptions res={resolutions} updateMediaContent={setImgUrl} dropdownId={props.data.imgWithRes[0][0]} />);
     }, [props]);
     return (
         <div>
-            <img className="img-fluid" src={imgUrl} controls onLoad={() => { }} alt={props.data.title} />
+            {imgOnLoadWait}
+            <img className="img-fluid" src={imgUrl} controls onLoad={() => {setImgOnLoadWait(undefined)}} alt={props.data.title} />
             <div>
                 {imgResolutions}
             </div>
@@ -41,17 +47,21 @@ function ImageComponent(props) {
 const MediaOptions = (props) => {
     const [options, setOptions] = useState([]);
     const [dropdownCurrentState, setDropdownCurrentState] = useState(<BootstrapSmallLoader/>);
-    
+    const imgId = props.dropdownId;
     useEffect(() => {
+        console.log(props.res);
+
         const dropdownItems = [];
         const resolutionsImg = Object.keys(props.res);
         resolutionsImg.forEach(element => {
             dropdownItems.push(
                 <span
                     className="dropdown-item"
+                    style={{cursor:"pointer"}}
                     onClick={() => { 
                         props.updateMediaContent(props.res[element]);
                     }}
+                    key={imgId}
                 >
                     {element}
                 </span>
@@ -59,16 +69,20 @@ const MediaOptions = (props) => {
         });
 
         setOptions(dropdownItems);
-        setDropdownCurrentState(props.res[resolutionsImg[0]]);
-        props.updateMediaContent(props.res[resolutionsImg[0]])
 
+        console.log("default setting hte valksss");
+        console.log(props.res[resolutionsImg[0]]);
+        console.log(resolutionsImg)
+        setDropdownCurrentState(resolutionsImg[0]);
+        props.updateMediaContent(props.res[resolutionsImg[0]])
+        
     }, [props]);
     return (
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id={imgId} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {dropdownCurrentState}
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu" aria-labelledby={imgId}>
                 {options}
             </div>
         </div>
