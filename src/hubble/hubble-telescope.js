@@ -42,13 +42,19 @@ class HubbleTelescope extends React.Component {
     fetchAllImgVid(){
         fetch(this.state.urlToFetch+this.state.selectedOption).then(res=>res.json()).then(res=>{
             const data_def=[];
-            res.forEach(element=>{
-                const data=JSON.parse(element);
+            for(var index=0;index<res.length;index++){
+                const data=JSON.parse(res[index]);
                 console.log(data);
                 data_def.push(<ImageComponent data={data}/>);
-            });
+                if(index>5)break;
+            }
+            // res.forEach(element=>{
+            //     const data=JSON.parse(element);
+            //     console.log(data);
+            //     data_def.push(<ImageComponent data={data}/>);
+            // });
             this.setState({
-                results:"Laoded"
+                results:data_def
             })
         });
     }
@@ -60,12 +66,12 @@ class HubbleTelescope extends React.Component {
                 <br />
                 <ImageVidOps getOption={this.getOption} /><br />
                 <div class="input-group mb-3">
-                    <input class="form-control" id="searchIDDescription" type="search" placeholder="M87.." style={{
+                    <input className="form-control" id="searchIDDescription" type="search" placeholder="M87.." style={{
                         borderRadius: "40px", borderColor: "#007bff",
                         backgroundColor: "transparent", color: "white"
                     }} aria-label="searchBox" aria-describedby="basic-addon2" />
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="button" style={{ borderRadius: "40px" }}
+                    <div className="input-group-append">
+                        <button className="btn btn-outline-primary" type="button" style={{ borderRadius: "40px" }}
                             id="instantTrigger" onClick={this.loadResults}>Search</button>
                     </div>
                 </div>
