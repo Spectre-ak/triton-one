@@ -31,7 +31,13 @@ function ImageComponent(props) {
         });
         console.log(resolutions);
 
-        setImgResolutions(<MediaOptions res={resolutions} updateMediaContent={setImgUrl} dropdownId={props.data.imgWithRes[0][0]} />);
+        setImgResolutions(
+        <MediaOptions 
+        res={resolutions} 
+        updateMediaContent={setImgUrl} 
+        setImgOnLoadWait={setImgOnLoadWait}
+        dropdownId={props.data.imgWithRes[0][0]} />
+        );
     }, [props]);
     return (
         <div>
@@ -62,6 +68,7 @@ const MediaOptions = (props) => {
                     onClick={() => { 
                         props.updateMediaContent(props.res[element]);
                         setDropdownCurrentState(element);
+                        props.setImgOnLoadWait(<LoaderWithoutTimer/>);
                     }}
                     key={spanId+"spanID"}
                 >
