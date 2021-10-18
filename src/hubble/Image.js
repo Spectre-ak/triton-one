@@ -50,18 +50,20 @@ const MediaOptions = (props) => {
     const imgId = props.dropdownId;
     useEffect(() => {
         console.log(props.res);
-
+        let spanId=0;
         const dropdownItems = [];
         const resolutionsImg = Object.keys(props.res);
         resolutionsImg.forEach(element => {
+            spanId++;
             dropdownItems.push(
                 <span
                     className="dropdown-item"
                     style={{cursor:"pointer"}}
                     onClick={() => { 
                         props.updateMediaContent(props.res[element]);
+                        setDropdownCurrentState(element);
                     }}
-                    key={imgId}
+                    key={spanId+"spanID"}
                 >
                     {element}
                 </span>
@@ -79,7 +81,7 @@ const MediaOptions = (props) => {
     }, [props]);
     return (
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id={imgId} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-outline-primary dropdown-toggle" type="button" id={imgId} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {dropdownCurrentState}
             </button>
             <div class="dropdown-menu" aria-labelledby={imgId}>
