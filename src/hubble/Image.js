@@ -13,15 +13,26 @@ moon Ganymede for the first time, which is present due to the thermal escape of 
 */
 
 const BootstrapSmallLoader = () => {
-    return(
+    return (
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
     );
+};
+
+
+
+const styleCollapse = {
+    width: "90%",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis"
 };
 
 function ImageComponent(props) {
     const [imgUrl, setImgUrl] = useState(0);
     const [imgResolutions, setImgResolutions] = useState(0);
-    const [imgOnLoadWait, setImgOnLoadWait] = useState(<LoaderWithoutTimer/>);
+    const [imgOnLoadWait, setImgOnLoadWait] = useState(<LoaderWithoutTimer />);
+    const [title, setTitle] = useState(<BootstrapSmallLoader />);
+    const collapseID = props.data.imgWithRes[0][0].split("/").pop().split(".")[0] + "collapseID";
 
     useEffect(() => {
         const resolutions = {};
@@ -30,33 +41,54 @@ function ImageComponent(props) {
             resolutions[element[1]] = element[0];
         });
         console.log(resolutions);
-
+        setTitle(props.data.title);
         setImgResolutions(
-        <MediaOptions 
-        res={resolutions} 
-        updateMediaContent={setImgUrl} 
-        setImgOnLoadWait={setImgOnLoadWait}
-        dropdownId={props.data.imgWithRes[0][0]} />
+            <MediaOptions
+                res={resolutions}
+                updateMediaContent={setImgUrl}
+                setImgOnLoadWait={setImgOnLoadWait}
+                dropdownId={props.data.imgWithRes[0][0]}
+            />
         );
+
     }, [props]);
     return (
         <div>
+            <h5>
+                {title}
+            </h5>
             {imgOnLoadWait}
-            <img className="img-fluid" src={imgUrl} controls onLoad={() => {setImgOnLoadWait(undefined)}} alt={props.data.title} />
+            <img className="img-fluid" src={imgUrl} controls onLoad={() => { setImgOnLoadWait(undefined) }} alt={props.data.title} />
             <div>
                 {imgResolutions}
             </div>
+            <div>
+                <p>
+                    <a class="btn btn-outline-primary collapsed" data-toggle="collapse" href={"#" + collapseID} role="button" aria-expanded="false" style={styleCollapse}>
+                        {props.data.info}
+                    </a>
+                </p>
+                <div class="collapse" id={collapseID} >
+                    <div class="card card-body">
+                        <p>
+                            {props.data.date}
+                        </p>
+                        {props.data.info}
+                    </div>
+                </div>
+            </div>
+            <br />
         </div>
     )
 }
 
 const MediaOptions = (props) => {
     const [options, setOptions] = useState([]);
-    const [dropdownCurrentState, setDropdownCurrentState] = useState(<BootstrapSmallLoader/>);
+    const [dropdownCurrentState, setDropdownCurrentState] = useState(<BootstrapSmallLoader />);
     const imgId = props.dropdownId;
     useEffect(() => {
         console.log(props.res);
-        let spanId=0;
+        let spanId = 0;
         const dropdownItems = [];
         const resolutionsImg = Object.keys(props.res);
         resolutionsImg.forEach(element => {
@@ -64,13 +96,13 @@ const MediaOptions = (props) => {
             dropdownItems.push(
                 <span
                     className="dropdown-item"
-                    style={{cursor:"pointer"}}
-                    onClick={() => { 
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
                         props.updateMediaContent(props.res[element]);
                         setDropdownCurrentState(element);
-                        props.setImgOnLoadWait(<LoaderWithoutTimer/>);
+                        props.setImgOnLoadWait(<LoaderWithoutTimer />);
                     }}
-                    key={spanId+"spanID"}
+                    key={spanId + "spanID"}
                 >
                     {element}
                 </span>
@@ -84,7 +116,7 @@ const MediaOptions = (props) => {
         console.log(resolutionsImg)
         setDropdownCurrentState(resolutionsImg[0]);
         props.updateMediaContent(props.res[resolutionsImg[0]])
-        
+
     }, [props]);
     return (
         <div class="dropdown">
