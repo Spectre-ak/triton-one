@@ -54,7 +54,7 @@ function ImageComponent(props) {
     }, [props]);
     return (
         <div>
-            <h5>
+            <h5 className="hubble-tab-img-head">
                 {title}
             </h5>
             {imgOnLoadWait}
@@ -62,6 +62,7 @@ function ImageComponent(props) {
             <div>
                 {imgResolutions}
             </div>
+            <br/>
             <div>
                 <p>
                     <a class="btn btn-outline-primary collapsed" data-toggle="collapse" href={"#" + collapseID} role="button" aria-expanded="false" style={styleCollapse}>
