@@ -310,3 +310,7 @@ iframe {
     border-color: transparent;
 }
 
+.hubble-tab-img-head {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
