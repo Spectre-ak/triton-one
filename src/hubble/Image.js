@@ -1,24 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { LoaderWithoutTimer } from '../Loader';
 
-/*
-
-{"date":"Release Date: July 26, 2021 11:00AM (EDT)","title":"Hubble's View of Ganymede in 1996",
-"imgWithRes":[["https://stsci-opo.org/STScI-01FAK39TV2FP144THY7C1822Y0.png"," 1200 X 1200"]],"tags":["Moons"],
-"info":"This image presents Jupiter's moon Ganymede as seen by NASA's Hubble Space Telescope in 1996. Located 1/2- billion miles (over 600 million kilometers)
- away, Hubble can follow changes on the moon and reveal other characteristics at ultraviolet and near-infrared wavelengths. Astronomers have now used new and 
- archival datasets from Hubble to reveal evidence of water vapor in the atmosphere of Jupiter's 
-moon Ganymede for the first time, which is present due to the thermal escape of water vapor from the moon's icy surface. Credits: SCIENCE: NASA, ESA, John Spencer (SwRI Boulder)"}
-
-*/
-
 const BootstrapSmallLoader = () => {
     return (
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
     );
 };
-
-
 
 const styleCollapse = {
     width: "90%",
