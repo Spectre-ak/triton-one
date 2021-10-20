@@ -54,13 +54,26 @@ class PaginationHubble extends React.Component {
     updatePageData() {
         const slice = this.state.data.slice(this.state.offset, this.state.offset + this.state.perPage)
         console.log(slice);
+        console.log(this.props.type);
 
-        const postData = this.props.type === "all/images" ? slice.map(data =>
-            <ImageComponent data={JSON.parse(data)} />
+        const postData = this.props.type === "all/images" ? slice.map(data => {
+            try {
+                return <ImageComponent data={JSON.parse(data)} />;
+            } catch (e) {
+                return <ImageComponent data={data} />;
+            }
+        }
         ) :
-            slice.map(data =>
-                <VideoComponent data={JSON.parse(data)} />
+            slice.map(data => {
+                try {
+                    return <VideoComponent data={JSON.parse(data)} />;
+                } catch (e) {
+                    return <VideoComponent data={data} />;
+                }
+
+            }
             );
+            
         //console.log(this.state.data.length);
         this.setState({
             pageCount: Math.ceil(this.state.data.length / this.state.perPage),
