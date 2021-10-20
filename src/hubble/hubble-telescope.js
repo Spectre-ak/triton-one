@@ -1,21 +1,19 @@
-import ReactDOM from "react-dom";
 import React from 'react';
 import PaginationHubble from "./Pagination";
 import Loader from "../Loader";
-import ImageComponent from "./Image";
 
 function ImageVidOps(props) {
-    const changeOption = (e) =>{
+    const changeOption = (e) => {
         props.getOption(e);
     };
     return (
         <form>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultChecked onClick={() => changeOption(1)}/>
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultChecked onClick={() => changeOption(1)} />
                 <label class="form-check-label" for="inlineRadio1" >Images</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onClick={() => changeOption(2)}/>
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onClick={() => changeOption(2)} />
                 <label class="form-check-label" for="inlineRadio2" >Videos</label>
             </div>
         </form>
@@ -31,26 +29,33 @@ class HubbleTelescope extends React.Component {
         this.state = {
             urlToFetch: "https://hubblesite.azurewebsites.net/",
             selectedOption: "all/images",
-            results:<Loader/>
+            searchEndpoint: "images/tags/",
+            results: <Loader />
         };
         this.loadResults = this.loadResults.bind(this);
+
     }
-    
     componentDidMount() {
-        this.fetchAllImgVid();
+        this.fetchData();
     }
-    fetchAllImgVid(){
-        fetch(this.state.urlToFetch+this.state.selectedOption).then(res=>res.json()).then(res=>{
-            const data_def=[];
-            res.forEach(element=>{
-                const data=JSON.parse(element);
-                console.log(data);
-                data_def.push(<ImageComponent data={data}/>);
-            });
-            this.setState({
-                results:"Laoded"
+    fetchData(tags = undefined) {
+        fetch(tags ? this.state.urlToFetch + this.state.searchEndpoint + tags : this.state.urlToFetch + this.state.selectedOption)
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+                if(res && res.length>1)
+                    this.setState({
+                        results: <PaginationHubble data={res} type={this.state.selectedOption} />
+                    });
+                    
+                else throw new Error("no-results"); 
             })
-        });
+            .catch((err)=>{
+                console.log(err.message);
+                this.setState({
+                    results: <h3><i>{err.message==="no-results"?"No results found":"Some error occurred. Try again later."}</i></h3>
+                })
+            });
     }
     render() {
         return (
@@ -60,37 +65,43 @@ class HubbleTelescope extends React.Component {
                 <br />
                 <ImageVidOps getOption={this.getOption} /><br />
                 <div class="input-group mb-3">
-                    <input class="form-control" id="searchIDDescription" type="search" placeholder="M87.." style={{
+                    <input className="form-control" id="searchIDDescription" type="search" placeholder="M87.." style={{
                         borderRadius: "40px", borderColor: "#007bff",
                         backgroundColor: "transparent", color: "white"
                     }} aria-label="searchBox" aria-describedby="basic-addon2" />
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="button" style={{ borderRadius: "40px" }}
+                    <div className="input-group-append">
+                        <button className="btn btn-outline-primary" type="button" style={{ borderRadius: "40px" }}
                             id="instantTrigger" onClick={this.loadResults}>Search</button>
                     </div>
                 </div>
                 <br />
                 <div id="divForResults">
                     {this.state.results}
+
                 </div>
             </div>
         )
     }
     loadResults() {
-        ReactDOM.unmountComponentAtNode(document.getElementById("divForResults"));
-        const searchParam = document.getElementById("searchIDDescription").value;
-        const media_type = this.state.selectedOption === "all/images" ? "image" : "video";
-        ReactDOM.render(<PaginationHubble urlToFetch={this.state.urlToFetch} media_type={media_type}
-            search={searchParam} />, document.getElementById("divForResults"));
-        window.history.pushState('', "", "/hubble-gallery/" + media_type + "~search~" + searchParam);
+        let searchParam = document.querySelector('#searchIDDescription').value;
+        searchParam = searchParam.trim();
+        searchParam = searchParam.replaceAll(' ', '+');
 
-
+        this.setState({
+            results: <Loader />
+        });
+        if (searchParam && searchParam.length > 0)
+            this.fetchData(searchParam);
+        else
+            this.fetchData();
     }
     getOption = (e) => {
         console.log(e);
         const selectedOption = e === 1 ? "all/images" : "all/videos";
+        const searchEndpoint = e === 1 ? "images/tags/" : "videos/tags/";
         this.setState({
-            selectedOption: selectedOption
+            selectedOption: selectedOption,
+            searchEndpoint: searchEndpoint,
         }, () => {
             //console.log(this.state);
         });
