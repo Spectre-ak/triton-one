@@ -35,28 +35,25 @@ class HubbleTelescope extends React.Component {
         this.loadResults = this.loadResults.bind(this);
 
     }
-
     componentDidMount() {
         this.fetchData();
     }
-    fetchData() {
-        fetch(this.state.urlToFetch + this.state.selectedOption)
+    fetchData(tags = undefined) {
+        fetch(tags ? this.state.urlToFetch + this.state.searchEndpoint + tags : this.state.urlToFetch + this.state.selectedOption)
             .then(res => res.json())
             .then(res => {
                 console.log(res);
+                if(res && res.length>1)
+                    this.setState({
+                        results: <PaginationHubble data={res} type={this.state.selectedOption} />
+                    });
+                    
+                else throw new Error("no-results"); 
+            })
+            .catch((err)=>{
+                console.log(err.message);
                 this.setState({
-                    results: <PaginationHubble data={res} type={this.state.selectedOption} />
-                })
-            });
-    }
-    fetchSearchData(tags) {
-        console.log(this.state.urlToFetch + this.state.searchEndpoint + tags);
-        fetch(this.state.urlToFetch + this.state.searchEndpoint + tags)
-            .then(res => res.json())
-            .then(res => {
-                console.log(res);
-                this.setState({
-                    results: <PaginationHubble data={res} type={this.state.selectedOption} />
+                    results: <h3><i>{err.message==="no-results"?"No results found":"Some error occurred. Try again later."}</i></h3>
                 })
             });
     }
@@ -93,18 +90,18 @@ class HubbleTelescope extends React.Component {
         this.setState({
             results: <Loader />
         });
-        if(searchParam && searchParam.length > 0)
-            this.fetchSearchData(searchParam);
+        if (searchParam && searchParam.length > 0)
+            this.fetchData(searchParam);
         else
             this.fetchData();
     }
     getOption = (e) => {
         console.log(e);
         const selectedOption = e === 1 ? "all/images" : "all/videos";
-        const searchEndpoint = e === 1 ? "images/tags/": "videos/tags/";
+        const searchEndpoint = e === 1 ? "images/tags/" : "videos/tags/";
         this.setState({
             selectedOption: selectedOption,
-            searchEndpoint:searchEndpoint,
+            searchEndpoint: searchEndpoint,
         }, () => {
             //console.log(this.state);
         });
