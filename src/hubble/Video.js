@@ -19,10 +19,10 @@ function VideoComponent(props) {
     useEffect(() => {
         const resolutions = {};
         props.data.videoLinks.forEach(element => {
-            console.log(element);
+            //console.log(element);
             resolutions[element[1]] = element[0];
         });
-        console.log(resolutions);
+        //console.log(resolutions);
         setTitle(props.data.title);
         setVidResolutions(
             <MediaOptions

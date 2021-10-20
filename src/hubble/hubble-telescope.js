@@ -42,7 +42,7 @@ class HubbleTelescope extends React.Component {
         fetch(tags ? this.state.urlToFetch + this.state.searchEndpoint + tags : this.state.urlToFetch + this.state.selectedOption)
             .then(res => res.json())
             .then(res => {
-                console.log(res);
+                //console.log(res);
                 if(res && res.length>1)
                     this.setState({
                         results: <PaginationHubble data={res} type={this.state.selectedOption} />
@@ -51,7 +51,7 @@ class HubbleTelescope extends React.Component {
                 else throw new Error("no-results"); 
             })
             .catch((err)=>{
-                console.log(err.message);
+                //console.log(err.message);
                 this.setState({
                     results: <h3><i>{err.message==="no-results"?"No results found":"Some error occurred. Try again later."}</i></h3>
                 })
@@ -77,7 +77,6 @@ class HubbleTelescope extends React.Component {
                 <br />
                 <div id="divForResults">
                     {this.state.results}
-
                 </div>
             </div>
         )
@@ -96,7 +95,7 @@ class HubbleTelescope extends React.Component {
             this.fetchData();
     }
     getOption = (e) => {
-        console.log(e);
+        //console.log(e);
         const selectedOption = e === 1 ? "all/images" : "all/videos";
         const searchEndpoint = e === 1 ? "images/tags/" : "videos/tags/";
         this.setState({

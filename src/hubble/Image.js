@@ -25,10 +25,10 @@ function ImageComponent(props) {
     useEffect(() => {
         const resolutions = {};
         props.data.imgWithRes.forEach(element => {
-            console.log(element);
+            //console.log(element);
             resolutions[element[1]] = element[0];
         });
-        console.log(resolutions);
+        //console.log(resolutions);
         setTitle(props.data.title);
         setImgResolutions(
             <MediaOptions
@@ -88,7 +88,7 @@ const MediaOptions = (props) => {
     const [dropdownCurrentState, setDropdownCurrentState] = useState(<BootstrapSmallLoader />);
     const Id = props.dropdownId;
     useEffect(() => {
-        console.log(props.res);
+        //console.log(props.res);
         let spanId = 0;
         const dropdownItems = [];
         const resolutionsImg = Object.keys(props.res);
@@ -113,9 +113,9 @@ const MediaOptions = (props) => {
 
         setOptions(dropdownItems);
 
-        console.log("default setting hte valksss");
-        console.log(props.res[resolutionsImg[0]]);
-        console.log(resolutionsImg)
+        // console.log("default setting hte valksss");
+        // console.log(props.res[resolutionsImg[0]]);
+        // console.log(resolutionsImg)
         setDropdownCurrentState(resolutionsImg[0]);
         props.updateMediaContent(props.res[resolutionsImg[0]])
 

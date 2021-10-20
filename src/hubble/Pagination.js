@@ -41,7 +41,7 @@ class PaginationHubble extends React.Component {
     handlePageClick(e) {
         const selectedPage = e.selected;
         const offset = selectedPage * this.state.perPage;
-        console.log(selectedPage);
+        //console.log(selectedPage);
         this.setState({
             currentPage: selectedPage,
             offset: offset,
@@ -53,8 +53,8 @@ class PaginationHubble extends React.Component {
     }
     updatePageData() {
         const slice = this.state.data.slice(this.state.offset, this.state.offset + this.state.perPage)
-        console.log(slice);
-        console.log(this.props.type);
+        // console.log(slice);
+        // console.log(this.props.type);
 
         const postData = this.props.type === "all/images" ? slice.map(data => {
             try {
