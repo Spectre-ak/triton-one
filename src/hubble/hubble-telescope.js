@@ -65,7 +65,7 @@ class HubbleTelescope extends React.Component {
                 <br />
                 <ImageVidOps getOption={this.getOption} /><br />
                 <div class="input-group mb-3">
-                    <input className="form-control" id="searchIDDescription" type="search" placeholder="M87.." style={{
+                    <input className="form-control" id="searchIDDescription" type="search" placeholder="Mars.." style={{
                         borderRadius: "40px", borderColor: "#007bff",
                         backgroundColor: "transparent", color: "white"
                     }} aria-label="searchBox" aria-describedby="basic-addon2" />
