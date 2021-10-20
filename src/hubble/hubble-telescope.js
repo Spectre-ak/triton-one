@@ -29,9 +29,11 @@ class HubbleTelescope extends React.Component {
         this.state = {
             urlToFetch: "https://hubblesite.azurewebsites.net/",
             selectedOption: "all/images",
+            searchEndpoint: "images/tags/",
             results: <Loader />
         };
         this.loadResults = this.loadResults.bind(this);
+
     }
 
     componentDidMount() {
@@ -43,7 +45,18 @@ class HubbleTelescope extends React.Component {
             .then(res => {
                 console.log(res);
                 this.setState({
-                    results: <PaginationHubble data={res} type={this.state.selectedOption}/>
+                    results: <PaginationHubble data={res} type={this.state.selectedOption} />
+                })
+            });
+    }
+    fetchSearchData(tags) {
+        console.log(this.state.urlToFetch + this.state.searchEndpoint + tags);
+        fetch(this.state.urlToFetch + this.state.searchEndpoint + tags)
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+                this.setState({
+                    results: <PaginationHubble data={res} type={this.state.selectedOption} />
                 })
             });
     }
@@ -73,16 +86,25 @@ class HubbleTelescope extends React.Component {
         )
     }
     loadResults() {
+        let searchParam = document.querySelector('#searchIDDescription').value;
+        searchParam = searchParam.trim();
+        searchParam = searchParam.replaceAll(' ', '+');
+
         this.setState({
-            results:<Loader/>
-        })
-        this.fetchData();
+            results: <Loader />
+        });
+        if(searchParam && searchParam.length > 0)
+            this.fetchSearchData(searchParam);
+        else
+            this.fetchData();
     }
     getOption = (e) => {
         console.log(e);
         const selectedOption = e === 1 ? "all/images" : "all/videos";
+        const searchEndpoint = e === 1 ? "images/tags/": "videos/tags/";
         this.setState({
-            selectedOption: selectedOption
+            selectedOption: selectedOption,
+            searchEndpoint:searchEndpoint,
         }, () => {
             //console.log(this.state);
         });
