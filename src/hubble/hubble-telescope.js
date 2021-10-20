@@ -1,21 +1,19 @@
-import ReactDOM from "react-dom";
 import React from 'react';
 import PaginationHubble from "./Pagination";
 import Loader from "../Loader";
-import ImageComponent from "./Image";
 
 function ImageVidOps(props) {
-    const changeOption = (e) =>{
+    const changeOption = (e) => {
         props.getOption(e);
     };
     return (
         <form>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultChecked onClick={() => changeOption(1)}/>
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultChecked onClick={() => changeOption(1)} />
                 <label class="form-check-label" for="inlineRadio1" >Images</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onClick={() => changeOption(2)}/>
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onClick={() => changeOption(2)} />
                 <label class="form-check-label" for="inlineRadio2" >Videos</label>
             </div>
         </form>
@@ -31,32 +29,23 @@ class HubbleTelescope extends React.Component {
         this.state = {
             urlToFetch: "https://hubblesite.azurewebsites.net/",
             selectedOption: "all/images",
-            results:<Loader/>
+            results: <Loader />
         };
         this.loadResults = this.loadResults.bind(this);
     }
-    
+
     componentDidMount() {
-        this.fetchAllImgVid();
+        this.fetchData();
     }
-    fetchAllImgVid(){
-        fetch(this.state.urlToFetch+this.state.selectedOption).then(res=>res.json()).then(res=>{
-            const data_def=[];
-            for(var index=0;index<res.length;index++){
-                const data=JSON.parse(res[index]);
-                console.log(data);
-                data_def.push(<ImageComponent data={data}/>);
-                if(index>5)break;
-            }
-            // res.forEach(element=>{
-            //     const data=JSON.parse(element);
-            //     console.log(data);
-            //     data_def.push(<ImageComponent data={data}/>);
-            // });
-            this.setState({
-                results:data_def
-            })
-        });
+    fetchData() {
+        fetch(this.state.urlToFetch + this.state.selectedOption)
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+                this.setState({
+                    results: <PaginationHubble data={res} type={this.state.selectedOption}/>
+                })
+            });
     }
     render() {
         return (
@@ -78,19 +67,16 @@ class HubbleTelescope extends React.Component {
                 <br />
                 <div id="divForResults">
                     {this.state.results}
+
                 </div>
             </div>
         )
     }
     loadResults() {
-        ReactDOM.unmountComponentAtNode(document.getElementById("divForResults"));
-        const searchParam = document.getElementById("searchIDDescription").value;
-        const media_type = this.state.selectedOption === "all/images" ? "image" : "video";
-        ReactDOM.render(<PaginationHubble urlToFetch={this.state.urlToFetch} media_type={media_type}
-            search={searchParam} />, document.getElementById("divForResults"));
-        window.history.pushState('', "", "/hubble-gallery/" + media_type + "~search~" + searchParam);
-
-
+        this.setState({
+            results:<Loader/>
+        })
+        this.fetchData();
     }
     getOption = (e) => {
         console.log(e);
