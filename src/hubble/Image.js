@@ -32,6 +32,7 @@ function ImageComponent(props) {
     const [imgResolutions, setImgResolutions] = useState(0);
     const [imgOnLoadWait, setImgOnLoadWait] = useState(<LoaderWithoutTimer />);
     const [title, setTitle] = useState(<BootstrapSmallLoader />);
+    const [tags, setTags] = useState(<BootstrapSmallLoader />);
     const collapseID = props.data.imgWithRes[0][0].split("/").pop().split(".")[0] + "collapseID";
 
     useEffect(() => {
@@ -50,6 +51,13 @@ function ImageComponent(props) {
                 dropdownId={props.data.imgWithRes[0][0]}
             />
         );
+        const Tags = [];
+        if (props.data.tags && props.data.tags.length > 0) {
+            props.data.tags.map(tag =>
+                Tags.push(<span style={{ paddingLeft: "5px", paddingRight: "5px" }}><span class="badge badge-secondary" >{tag}</span></span>)
+            );
+            setTags(Tags);
+        }
 
     }, [props]);
     return (
@@ -62,7 +70,7 @@ function ImageComponent(props) {
             <div>
                 {imgResolutions}
             </div>
-            <br/>
+            <br />
             <div>
                 <p>
                     <a class="btn btn-outline-primary collapsed" data-toggle="collapse" href={"#" + collapseID} role="button" aria-expanded="false" style={styleCollapse}>
@@ -74,7 +82,12 @@ function ImageComponent(props) {
                         <p>
                             {props.data.date}
                         </p>
-                        {props.data.info}
+                        <p>
+                            {props.data.info}
+                        </p>
+                        <p>
+                            <span class="badge badge-primary">Tags: </span> {tags}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -86,7 +99,7 @@ function ImageComponent(props) {
 const MediaOptions = (props) => {
     const [options, setOptions] = useState([]);
     const [dropdownCurrentState, setDropdownCurrentState] = useState(<BootstrapSmallLoader />);
-    const imgId = props.dropdownId;
+    const Id = props.dropdownId;
     useEffect(() => {
         console.log(props.res);
         let spanId = 0;
@@ -101,7 +114,8 @@ const MediaOptions = (props) => {
                     onClick={() => {
                         props.updateMediaContent(props.res[element]);
                         setDropdownCurrentState(element);
-                        props.setImgOnLoadWait(<LoaderWithoutTimer />);
+                        if(props.setImgOnLoadWait)
+                            props.setImgOnLoadWait(<LoaderWithoutTimer />);
                     }}
                     key={spanId + "spanID"}
                 >
@@ -121,14 +135,15 @@ const MediaOptions = (props) => {
     }, [props]);
     return (
         <div class="dropdown">
-            <button class="btn btn-outline-primary dropdown-toggle" type="button" id={imgId} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-outline-primary dropdown-toggle" type="button" id={Id} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {dropdownCurrentState}
             </button>
-            <div class="dropdown-menu" aria-labelledby={imgId}>
+            <div class="dropdown-menu" aria-labelledby={Id}>
                 {options}
             </div>
         </div>
     )
 };
 
+export { MediaOptions, BootstrapSmallLoader };
 export default ImageComponent;
