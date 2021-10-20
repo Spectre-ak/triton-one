@@ -1,24 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { LoaderWithoutTimer } from '../Loader';
 import { BootstrapSmallLoader } from './Image';
 import { MediaOptions } from './Image';
 
-/**
- {"date":"Release Date: June 09, 2021 4:30PM (EDT)","title":"Animation of Fast-Rotating Brown Dwarf",
- "videoLinks":[["https://stsci-opo.org/STScI-01F741X81X3ZYPMDK0P9Z3WBXF.mp4","1920 X 1080, 30 FPS, MP4 (30.70 MB)"],
- ["https://stsci-opo.org/STScI-01F741YAVC92KAJEB3SN3J4FYF.mp4","1280 X 720, 30 FPS, MP4 (16.06 MB)"]],
- "tags":["Brown Dwarfs"],
- "info":"This animation shows the fast rotation of a nearby, free-floating brown dwarf. The nomadic object, 
- called 2MASS J22081363+2921215, resembles a carved Halloween pumpkin, with light escaping from its hot interior. 
- Brown dwarfs are more massive than planets but too small to sustain nuclear fusion, which powers stars. 
- The animation is an artist's rendering and is based on 2.5 hours' worth of observations that measured the variations of light emitted 
- by the giant object. Previous research found the brown dwarf completes a rotation every 3.5 hours. Though only roughly 115 light-years away,
-  the monster object is too distant for any features to be photographed. The brown dwarf has a mottled atmosphere with scattered clouds and mysterious 
-  dark spots reminiscent of Jupiter's Great Red Spot. Because the object is rotating very fast, clouds are whipping around it, creating a dynamic, turbulent 
-  atmosphere. Bright spots that appear on the rotating object indicate
-  regions where researchers can see deeper into the atmosphere, where it is hotter. Credits: ANIMATION: NASA, ESA, STScI, Leah Hustak (STScI)"} 
- 
- */
 const styleCollapse = {
     width: "90%",
     whiteSpace: "nowrap",
