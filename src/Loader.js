@@ -12,8 +12,7 @@ function Loader(){
                     document.getElementById("infoLoading").innerHTML="<i>Hold on...</i>";
                 if(seconds===thirdMsg)
                     document.getElementById("infoLoading").innerHTML="<i>Try Loading again...</i>";
-                if(seconds>=200)
-                    window.location.reload();
+
             }
             catch(err){
                 clearInterval(interval);
